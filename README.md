@@ -50,7 +50,7 @@ La diferencia principal de nuestra aplicación será su enfoque en la simplicida
 
 ## **Justificación de Tecnologías**
 
-- **React** como bien explica en su [sitio oficial](https://react.dev/) React es la tecnología ideal para desarrollar aplicaciones web interactivas, permitiendo una rápida creación de componentes que se actualizan dinámicamente con cambios en los datos. Es ampliamente utilizado y tiene una gran comunidad de soporte. Puedes encontrar más información en su [sitio oficial](https://reactjs.org/).
+- **React**, como bien explica en su [sitio oficial](https://react.dev/), es la tecnología ideal para desarrollar aplicaciones web interactivas, permitiendo una rápida creación de componentes que se actualizan dinámicamente con cambios en los datos. Es ampliamente utilizado y tiene una gran comunidad de soporte. Puedes encontrar más información en su [sitio oficial](https://reactjs.org/).
 
 - **Vite** Como podemos ver en [vite](https://vitejs.dev/) es elegido por su velocidad y simplicidad, lo que optimiza el tiempo de desarrollo y permite una mayor productividad al evitar las largas compilaciones durante el desarrollo. Para más detalles, consulta su .
 
