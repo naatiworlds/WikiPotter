@@ -2,31 +2,37 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 
 const Post = () => {
-    const { post } = useLoaderData();
-    console.log(post)
-    return (
-      <div>
-        <h1>Posts</h1>
-        <p>{post.title}</p>
-        <p>{post.body}</p>
+  const { post } = useLoaderData();
+
+  return (
+    <div className="d-flex flex-row">
+      <div className="m-3">
+        <img src={post.cover} alt="imagen" />
       </div>
-    );
+      <div className="m-5">
+        <h1>{post.title}</h1>
+        <p>{post.description}</p> {/* Ajusta según los datos reales */}
+      </div>
+    </div>
+  );
 };
 
 export default Post;
 
-export const loaderPosts = async ({params}) => {
+export const loaderPosts = async ({ params }) => {
   try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
+    const response = await fetch(
+      `https://potterapi-fedeperin.vercel.app/es/books?search${params.id}`
+    );
 
     if (!response.ok) {
-      throw new Error("Error al cargar los blogs");
+      throw new Error("Error al cargar el libro");
     }
 
     const post = await response.json();
-    return { post };
+    return { post: post[0] }; // Suponiendo que `post` es un array con un solo objeto
   } catch (error) {
     console.error(error);
-    return { post: [] }; // Retorna un array vacío en caso de error
+    return { post: {} }; // Retorna un objeto vacío en caso de error
   }
 };

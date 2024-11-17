@@ -5,11 +5,13 @@ import NavBar from "../components/NavBar"; // Correcto: NavBar en lugar de NabVa
 const LayoutPublic = () => {
   return (
     <div>
-      <h1>LayoutPublic</h1>
-      <NavBar /> {/* Cambiado a NavBar */}
+      <h1 className="text-center">WikiPotter</h1>
       {/* <main>Main</main> */}
+      <NavBar /> {/* Cambiado a NavBar */}
       <Outlet />
-      <footer>Footer</footer>
+      <footer className="bg-dark text-white text-center py-3 mt-auto">
+        Natiworlds © 2024 WikiPotter
+      </footer>
     </div>
   );
 };
