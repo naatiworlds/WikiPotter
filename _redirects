@@ -1,0 +1,8 @@
+/public
+  /_redirects
+  /index.html
+/src
+  /components
+  /pages
+  /App.js
+/package.json
