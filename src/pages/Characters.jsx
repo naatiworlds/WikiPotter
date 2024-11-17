@@ -1,29 +1,28 @@
-import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import "../css/index.css"; // Importa el archivo CSS donde has añadido las clases personalizadas
 
 const Characters = () => {
   const { characters } = useLoaderData();
 
   return (
-    <ul className="d-flex flex-wrap justify-content-center align-content-center list-unstyled">
+    <ul className="characters-list">
       {characters.length > 0 ? (
         characters.map((character) => (
-          <li className="m-2" key={character.index}>
-            {/* Usa un identificador único */}
+          <li className="character-item" key={character.index}>
             <Link to={`/character/${character.nickname}`}>
-              <img src={character.image} alt="portada del libro" />
+              <img src={character.image} alt={character.nickname} />
             </Link>
-            {/* Usa `_id` para la ruta */}
           </li>
         ))
       ) : (
-        <li>No hay characters</li>
+        <li className="no-characters">No hay personajes disponibles</li>
       )}
     </ul>
   );
 };
 
 export default Characters;
+
 
 export const loaderCharacters = async () => {
   try {

@@ -1,0 +1,37 @@
+/* Contenedor de la lista de personajes */
+.characters-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Cada elemento de la lista */
+  .character-item {
+    margin: 1rem; /* Similar a `m-2` de Bootstrap */
+  }
+  
+  /* Estilo de las imágenes dentro de los enlaces */
+  .character-item img {
+    width: 100%; /* Hace que la imagen ocupe todo el espacio disponible dentro del contenedor */
+    height: auto;
+    max-width: 150px; /* Ajusta el tamaño máximo de las imágenes */
+    border-radius: 8px; /* Bordes redondeados */
+    transition: transform 0.3s ease; /* Transición suave al hacer hover */
+  }
+  
+  /* Hover sobre las imágenes */
+  .character-item img:hover {
+    transform: scale(1.1); /* Agranda la imagen ligeramente en hover */
+  }
+  
+  /* Estilo para cuando no haya personajes */
+  .no-characters {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888; /* Color gris claro */
+  }
+  

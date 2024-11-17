@@ -1,6 +1,6 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar"; // Correcto: NavBar en lugar de NabVar
+import Footer from "../components/Footer";
 
 const LayoutPublic = () => {
   return (
@@ -9,9 +9,7 @@ const LayoutPublic = () => {
       {/* <main>Main</main> */}
       <NavBar /> {/* Cambiado a NavBar */}
       <Outlet />
-      <footer className="bg-dark text-white text-center py-3 mt-auto">
-        Natiworlds © 2024 WikiPotter
-      </footer>
+      <Footer />
     </div>
   );
 };

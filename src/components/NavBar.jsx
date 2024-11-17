@@ -1,17 +1,17 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom"; // Importación de Link
+import { NavLink } from "react-router-dom"; 
+import "../css/index.css"
 
 const NavBar = () => {
   return (
-    <nav className="navbar navbar-dark bg-secondary">
+    <nav className="navbar-custom">
       <div className="container">
-        <NavLink to="/" className="btn btn-outline-dark">
+        <NavLink to="/" className="nav-link">
           Spells
         </NavLink>
-        <NavLink to="/books" className="btn btn-outline-dark">
+        <NavLink to="/books" className="nav-link">
           Books
         </NavLink>
-        <NavLink to="/characters" className="btn btn-outline-dark">
+        <NavLink to="/characters" className="nav-link">
           Characters
         </NavLink>
       </div>
