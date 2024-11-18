@@ -5,10 +5,10 @@ const Characters = () => {
   const { characters } = useLoaderData();
 
   return (
-    <ul className="characters-list">
+    <ul className="characters-list d-flex flex-wrap justify-content-center align-content-center list-unstyled">
       {characters.length > 0 ? (
         characters.map((character) => (
-          <li className="character-item" key={character.index}>
+          <li className="character-item m-2" key={character.index}>
             <Link to={`/character/${character.nickname}`}>
               <img src={character.image} alt={character.nickname} />
             </Link>

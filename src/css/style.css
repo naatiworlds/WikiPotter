@@ -1,0 +1,27 @@
+/* App.css */
+.light {
+  background-color: #ffffff;
+  height: 100vh;
+  color: #000000;
+}
+.light a {
+  color: #000000;
+}
+
+.dark {
+  background-color: #333333;
+  height: 100vh;
+
+  color: #ffffff;
+}
+.dark a {
+  color: #ffffff;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

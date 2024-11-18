@@ -1,7 +1,6 @@
-import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
-const Blog = () => {
+const Books = () => {
   const { books } = useLoaderData();
 
   return (
@@ -23,7 +22,7 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default Books;
 
 export const loaderBlogs = async () => {
   try {

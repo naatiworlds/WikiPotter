@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Characters, { loaderCharacters } from "../pages/Characters";
-import Blog, { loaderBlogs } from "../pages/Blog";
+import Books, { loaderBlogs } from "../pages/Books";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
-import Post, { loaderPosts } from "../pages/Post";
+import Book, { loaderPosts } from "../pages/Book";
 import Character, { loaderCharacter } from "../pages/Character";
 
 export const router = createBrowserRouter([
@@ -34,12 +34,12 @@ export const router = createBrowserRouter([
           },
           {
             path: "/books",
-            element: <Blog />,
+            element: <Books />,
             loader: loaderBlogs,
           },
           {
             path: "/book/:index", // Asegúrate de que el parámetro sea `id`
-            element: <Post />,
+            element: <Book />,
             loader: loaderPosts,
           },
         ],

@@ -1,7 +1,6 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 
-const Post = () => {
+const Book = () => {
   const { post } = useLoaderData();
 
   return (
@@ -12,12 +11,13 @@ const Post = () => {
       <div className="m-5">
         <h1>{post.title}</h1>
         <p>{post.description}</p> {/* Ajusta según los datos reales */}
+        <NavLink to="/books">⬅️ Volver</NavLink>
       </div>
     </div>
   );
 };
 
-export default Post;
+export default Book;
 
 export const loaderPosts = async ({ params }) => {
   try {
