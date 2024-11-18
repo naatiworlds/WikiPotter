@@ -38,7 +38,7 @@ const Header = () => {
       <div>
         <button
           onClick={toggleTheme}
-          style={{ background: "none", border: "none" }}
+          style={{ background: "none", border: "none" }} 
         >
           {theme === "light" ? <MoonIcon /> : <SunIcon />}
         </button>
