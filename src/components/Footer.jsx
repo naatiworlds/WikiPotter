@@ -6,7 +6,9 @@ const Footer = () => {
     <footer className="footer-custom">
       <p>Natiworlds © 2024 WikiPotter</p>
       <ul>
-        <NavLink>Contacto</NavLink>
+        <NavLink to="/contacto">Contacto</NavLink>
+        <NavLink>Sobre Nosotros</NavLink>
+        <NavLink>Políticas de privacidad</NavLink>
       </ul>
     </footer>
   );

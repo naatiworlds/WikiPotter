@@ -1,0 +1,4 @@
+.welcome{
+    margin: var(--margin-spacing-components);
+    text-align: center;
+}

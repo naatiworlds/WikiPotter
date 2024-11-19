@@ -1,10 +1,13 @@
 /* Barra de navegación o contenedor con fondo oscuro y texto blanco */
 .footer-custom {
-    background-color: #343a40; /* bg-dark de Bootstrap */
-    color: white; /* text-white */
-    text-align: center; /* text-center */
-    padding-top: 1rem; /* py-3 (la cantidad de 1rem es un buen reemplazo para py-3) */
-    padding-bottom: 1rem;
-    margin-top: auto; /* mt-auto (esto lo usa generalmente en un flexbox para alinear al final) */
-  }
-  
+  text-align: center; /* text-center */
+  padding-top: 1rem; /* py-3 (la cantidad de 1rem es un buen reemplazo para py-3) */
+  padding-bottom: 1rem;
+  margin-top: auto; /* mt-auto (esto lo usa generalmente en un flexbox para alinear al final) */
+  border-top: 1px solid black;
+}
+.footer-custom ul{
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}

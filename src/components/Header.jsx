@@ -1,16 +1,16 @@
 import { useContext, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import SunIcon from "./SunIcon";
 import MoonIcon from "./MoonIcon";
-
-import "../css/header.css";
 import { UserContext } from "../context/UserContext";
 import UserLoginIcon from "./UserLoginIcon";
 import UserNotLoginIcon from "./UserNotLoginIcon";
-import LoginRegister from "../pages/LoginRegister";
-import { NavLink } from "react-router-dom";
+import LoginRegister from "./LoginRegister";
+
+import "../css/header.css";
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
@@ -21,7 +21,7 @@ const Header = () => {
   const logout = () => {
     setUser(null);
     Swal.fire({
-      icon: "info",
+      icon: "warning",
       title: "Cierre de sesión",
       text: "Has cerrado sesión correctamente.",
       timer: 2000,  // Duración de 2 segundos
@@ -36,9 +36,10 @@ const Header = () => {
       </h1>
       <div></div>
       <div>
-        <button
+        <button 
+        className="login"
           onClick={toggleTheme}
-          style={{ background: "none", border: "none" }} 
+           
         >
           {theme === "light" ? <MoonIcon /> : <SunIcon />}
         </button>

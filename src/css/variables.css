@@ -1,0 +1,14 @@
+:root{
+    /* Theme-light */
+    --bg-light: #fff;
+    --color-light: #000;
+    /* Theme-dark */
+    --bg-dark: #333;
+    --color-dark: #fff;
+    /* Spacing */
+    --margin-spacing-components: 1em auto;
+
+    /* Font */
+    --font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --text-xl: 2em;
+}

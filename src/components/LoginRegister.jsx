@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // LoginRegister.js
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";

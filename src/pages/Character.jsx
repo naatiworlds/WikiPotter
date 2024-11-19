@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 
 const Character = () => {
   const { character } = useLoaderData();
@@ -11,6 +11,7 @@ const Character = () => {
       <div className="m-5">
         <h1>{character.fullName}</h1>
         <p>{character.hogwartsHouse}</p> {/* Ajusta según los datos reales */}
+        <NavLink to="/characters">⬅️ Volver</NavLink>
       </div>
     </div>
   );

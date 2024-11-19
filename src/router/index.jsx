@@ -5,6 +5,7 @@ import Books, { loaderBlogs } from "../pages/Books";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
 import Book, { loaderPosts } from "../pages/Book";
+import Contacto from "../pages/Contacto";
 import Character, { loaderCharacter } from "../pages/Character";
 
 export const router = createBrowserRouter([
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
           {
             path: "/book/:index", // Asegúrate de que el parámetro sea `id`
             element: <Book />,
+            loader: loaderPosts,
+          },
+          {
+            path: "/contacto", // Asegúrate de que el parámetro sea `id`
+            element: <Contacto />,
             loader: loaderPosts,
           },
         ],

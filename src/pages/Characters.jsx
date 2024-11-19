@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Link, useLoaderData } from "react-router-dom";
 import "../css/index.css"; // Importa el archivo CSS donde has añadido las clases personalizadas
 

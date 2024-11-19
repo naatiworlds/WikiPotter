@@ -6,7 +6,7 @@ const NavBar = () => {
     <nav className="navbar-custom">
       <div className="container">
         <NavLink to="/" className="nav-link">
-          Spells
+          Home
         </NavLink>
         <NavLink to="/books" className="nav-link">
           Books
