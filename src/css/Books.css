@@ -49,14 +49,18 @@
 .item-display{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1em;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
 }
 .item-display .item-portrait{
     margin: var(--margin-portrait);
 }
 .item-display .item-description{
     margin: var(--margin-description);
+    width: 50%;
 }
 
 .item-display .item-description .childrens{
