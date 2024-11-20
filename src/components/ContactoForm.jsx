@@ -1,103 +1,112 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
+import "../css/contact-form.css"
 import Swal from "sweetalert2";
-import "../css/contact-form.css";
 
 const ContactoForm = () => {
-  const [contactoData, setContactoData] = useState({
-    username: "",
-    email: "",
-    asunto: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setContactoData({ ...contactoData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { username, email, asunto } = contactoData;
-
-    // Regex validations
-    const usernameRegex = /^[a-zA-Z0-9_]{3,15}$/; // Alphanumeric, underscores, 3-15 chars
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation
-    const asuntoRegex = /^.{10,300}$/; // Minimum 10 chars, max 300 chars
-
-    // Validate username
-    if (!username.trim() || !usernameRegex.test(username)) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "El nombre de usuario debe tener entre 3 y 15 caracteres alfanuméricos o guiones bajos.",
-      });
-      return;
-    }
-
-    // Validate email
-    if (!email.trim() || !emailRegex.test(email)) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Por favor, introduce un correo electrónico válido.",
-      });
-      return;
-    }
-
-    // Validate asunto
-    if (!asunto.trim() || !asuntoRegex.test(asunto)) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "El asunto debe tener entre 10 y 300 caracteres.",
-      });
-      return;
-    }
-
-    // Success message
-    Swal.fire({
-      title: "Enviado con éxito",
-      text: `Tu mensaje, ${username}, ha sido enviado con éxito!`,
-      icon: "success",
+    const [contactoData, setContactoData] = useState({
+      username: "",
+      email: "",
+      asunto: "",
     });
-
-    // Reset form
-    setContactoData({ username: "", email: "", asunto: "" });
+  
+    const [errors, setErrors] = useState({
+      username: "",
+      email: "",
+      asunto: "",
+    });
+  
+    const validateField = (name, value) => {
+      switch (name) {
+        case "username":
+          if (!/^[a-zA-Z0-9_]{3,15}$/.test(value)) {
+            return "Debe tener entre 3 y 15 caracteres alfanuméricos o guiones bajos.";
+          }
+          break;
+        case "email":
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            return "Introduce un correo electrónico válido.";
+          }
+          break;
+        case "asunto":
+          if (value.length < 10 || value.length > 300) {
+            return "Debe tener entre 10 y 300 caracteres.";
+          }
+          break;
+        default:
+          break;
+      }
+      return "";
+    };
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setContactoData({ ...contactoData, [name]: value });
+  
+      // Validar en tiempo real
+      setErrors({ ...errors, [name]: validateField(name, value) });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const newErrors = {
+        username: validateField("username", contactoData.username),
+        email: validateField("email", contactoData.email),
+        asunto: validateField("asunto", contactoData.asunto),
+      };
+  
+      setErrors(newErrors);
+  
+      // Si no hay errores, proceder
+      if (!Object.values(newErrors).some((error) => error)) {
+        Swal.fire({
+          title: "Enviado con éxito",
+          text: `Tu mensaje, ${contactoData.username}, ha sido enviado con éxito!`,
+          icon: "success",
+        });
+        setContactoData({ username: "", email: "", asunto: "" });
+      }
+    };
+  
+    return (
+      <div className="contact-form">
+        <h2>Contacto</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Usuario"
+            className="form-control mb-2"
+            value={contactoData.username}
+            onChange={handleChange}
+          />
+          {errors.username && <small className="text-danger">{errors.username}</small>}
+  
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="form-control mb-2"
+            value={contactoData.email}
+            onChange={handleChange}
+          />
+          {errors.email && <small className="text-danger">{errors.email}</small>}
+  
+          <textarea
+            name="asunto"
+            placeholder="Escribe tu petición"
+            className="form-control mb-2"
+            value={contactoData.asunto}
+            onChange={handleChange}
+          />
+          {errors.asunto && <small className="text-danger">{errors.asunto}</small>}
+  
+          <button type="submit" className="btn btn-primary mt-2">
+            Enviar
+          </button>
+        </form>
+      </div>
+    );
   };
-
-  return (
-    <div className="contact-form">
-      <h2>Contacto</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Usuario"
-          className="form-control mb-2"
-          value={contactoData.username}
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="form-control mb-2"
-          value={contactoData.email}
-          onChange={handleChange}
-        />
-        <textarea
-          name="asunto"
-          placeholder="Escribe tu petición"
-          className="form-control mb-2"
-          value={contactoData.asunto}
-          onChange={handleChange}
-        />
-        <button type="submit" className="btn btn-primary mt-2">
-          Enviar
-        </button>
-      </form>
-    </div>
-  );
-};
-
-export default ContactoForm;
+  
+  export default ContactoForm;
+  
