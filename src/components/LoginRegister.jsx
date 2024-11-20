@@ -7,7 +7,7 @@ import { UserContext } from "../context/UserContext";
 
 const LoginRegister = ({ onClose }) => {
   const { setUser } = useContext(UserContext);
-  
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -98,7 +98,6 @@ const LoginRegister = ({ onClose }) => {
   return (
     <div className="backdrop" onClick={handleBackdropClick}>
       <div className={`card ${isFlipped ? "flipped" : ""}`}>
-        
         {/* Frente: Login */}
         <div className="card-front">
           <h2>Login</h2>
@@ -119,7 +118,9 @@ const LoginRegister = ({ onClose }) => {
               value={loginData.password}
               onChange={(e) => handleChange(e, true)}
             />
-            <button type="submit" className="btn btn-primary mt-2">Iniciar Sesión</button>
+            <button type="submit" className="btn btn-primary mt-2">
+              Iniciar Sesión
+            </button>
           </form>
           <p>
             ¿No tienes cuenta?{" "}
@@ -155,7 +156,9 @@ const LoginRegister = ({ onClose }) => {
               value={registerData.password}
               onChange={(e) => handleChange(e, false)}
             />
-            <button type="submit" className="btn btn-primary mt-2">Registrarse</button>
+            <button type="submit" className="btn btn-primary mt-2">
+              Registrarse
+            </button>
           </form>
           <p>
             ¿Ya tienes una cuenta?{" "}
