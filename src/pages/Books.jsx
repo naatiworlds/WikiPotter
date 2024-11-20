@@ -1,18 +1,20 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Link, useLoaderData } from "react-router-dom";
+import "../css/Books.css"
 
 const Books = () => {
   const { books } = useLoaderData();
 
   return (
-    <ul className="d-flex flex-wrap justify-content-center align-content-center list-unstyled">
+    <ul className="item-list">
       {books.length > 0 ? (
         books.map((book) => (
-          <li className="m-2" key={book._id}>
-            {/* Usa un identificador único */}
+          <li className="item-child-list" key={book.index}>
             <Link to={`/book/${book.index}`}>
               <img src={book.cover} alt="portada del libro" />
             </Link>
-            {/* Usa `_id` para la ruta */}
+            <figcaption>{book.title}</figcaption>
+            <span>{book.releaseDate}</span>
           </li>
         ))
       ) : (

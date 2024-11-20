@@ -65,14 +65,14 @@ form {
   width: 100%;
 }
 
-input {
+.card-front input, .card-back input {
   padding: 8px;
   font-size: 16px;
   border-radius: 4px;
   border: 1px solid #ddd;
 }
 
-button {
+.card-front button, .card-back button {
   padding: 10px;
   font-size: 16px;
   color: #fff;
@@ -83,13 +83,13 @@ button {
   transition: background-color 0.3s;
 }
 
-p {
+.card-front p, .card-back p {
   margin-top: 20px;
   font-size: 14px;
   color: #333;
 }
 
-span {
+.card-front span, .card-back span {
   color: #007bff;
   cursor: pointer;
   text-decoration: underline;

@@ -1,0 +1,68 @@
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em; /* Espacio uniforme entre los elementos */
+    list-style: none;
+    padding: 0;
+    margin: var(--margin-spacing-components);
+}
+
+.item-list .item-child-list {
+    display: flex;
+    flex-direction: column; /* Alineación vertical para imagen y texto */
+    justify-content: space-between;
+    align-items: stretch; /* Alinea todo al centro horizontal */
+    width: var(--width-cards); /* Tamaño uniforme para cada elemento */
+    height: auto; /* Proporción uniforme */
+    padding: 1em; /* Espaciado interno */
+    background-color: #f9f9f9; /* Fondo opcional para resaltar el contenido */
+    border: 1px solid #ddd; /* Bordes opcionales para separación */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+    box-shadow: var(--shadow-marked); /* Sombra opcional para darle estilo */
+}
+
+.item-list .item-child-list img {
+    width: 100%; /* Asegura que la imagen llene su contenedor */
+    height: auto; /* Mantiene la proporción */
+    aspect-ratio: 3 / 4; /* Relación de aspecto para todas las imágenes */
+    object-fit: fill; /* Recorta la imagen si no se ajusta perfectamente */
+    border-radius: 4px; /* Redondea las esquinas para un diseño uniforme */
+}
+
+.item-list .item-child-list figcaption {
+    margin: 0.5em auto; /* Espacio uniforme entre la imagen y el texto */
+    font-weight: var(--text-bold);
+    text-align: center; /* Centra el texto debajo de la imagen */
+    color: #333; /* Color del texto */
+    font-size: var(--text-m); /* Tamaño de fuente uniforme */
+    width: 100%;
+}
+
+.item-list .item-child-list span {
+    margin-top: var(--margin-top-components); /* Espacio uniforme entre la imagen y el texto */
+    font-weight: bold;
+    text-align: right; /* Centra el texto debajo de la imagen */
+    font-size: var(--text-s); /* Tamaño de fuente uniforme */
+    width: 100%;
+}
+.item-display{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+}
+.item-display .item-portrait{
+    margin: var(--margin-portrait);
+}
+.item-display .item-description{
+    margin: var(--margin-description);
+}
+
+.item-display .item-description .childrens{
+    list-style: none;
+    margin-left: var(--margin-left-components);
+}
+.item-display .item-description .childrens li::before{
+    content: "- ";
+}

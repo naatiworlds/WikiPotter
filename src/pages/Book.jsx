@@ -1,16 +1,18 @@
 import { NavLink, useLoaderData } from "react-router-dom";
-
+import "../css/Books.css"
 const Book = () => {
   const { post } = useLoaderData();
 
   return (
-    <div className="d-flex flex-row">
-      <div className="m-3">
+    <div className="item-display">
+      <div className="item-portrait">
         <img src={post.cover} alt="imagen" />
       </div>
-      <div className="m-5">
+      <div className="item-description">
         <h1>{post.title}</h1>
         <p>{post.description}</p> {/* Ajusta según los datos reales */}
+        
+        
         <NavLink to="/books">⬅️ Volver</NavLink>
       </div>
     </div>

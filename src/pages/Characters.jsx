@@ -6,10 +6,10 @@ const Characters = () => {
   const { characters } = useLoaderData();
 
   return (
-    <ul className="characters-list d-flex flex-wrap justify-content-center align-content-center list-unstyled">
+    <ul className="item-list">
       {characters.length > 0 ? (
         characters.map((character) => (
-          <li className="character-item m-2" key={character.index}>
+          <li className="item-child-list m-2" key={character.index}>
             <Link to={`/character/${character.nickname}`}>
               <img src={character.image} alt={character.nickname} />
             </Link>
@@ -23,7 +23,6 @@ const Characters = () => {
 };
 
 export default Characters;
-
 
 export const loaderCharacters = async () => {
   try {
