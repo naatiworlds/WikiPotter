@@ -1,7 +1,27 @@
-.contact-form{
-    width: 50%;
-    margin: 0 auto;
+.contact-form {
+  width: 50%;
+  margin: 0 auto;
 }
-.contact-form textarea{
-    resize: none;
+.contact-form input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+.contact-form textarea {
+  resize: none;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+.contact-form button {
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
