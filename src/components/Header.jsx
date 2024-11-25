@@ -24,23 +24,29 @@ const Header = () => {
       icon: "warning",
       title: "Cierre de sesión",
       text: "Has cerrado sesión correctamente.",
-      timer: 2000,  // Duración de 2 segundos
-      showConfirmButton: false,  // Sin botón de confirmación
+      timer: 2000, // Duración de 2 segundos
+      showConfirmButton: false, // Sin botón de confirmación
     });
   };
 
   return (
     <header>
-      <h1 className="text-center">
+      <h1>
         <NavLink to="/">WikiPotter</NavLink>
       </h1>
-      <div></div>
       <div>
-        <button 
-        className="login"
-          onClick={toggleTheme}
-           
-        >
+        <select name="themes" id="">
+          <option value="" disabled={true} selected={true}>
+            Temas
+          </option>
+          <optgroup>
+            <option value="griffindor">Griffindor</option>
+            <option value="hufflepuff">Hufflepuff</option>
+            <option value="ravenclaw">Ravenclaw</option>
+            <option value="slytherin">Slytherin</option>
+          </optgroup>
+        </select>
+        <button className="login" onClick={toggleTheme}>
           {theme === "light" ? <MoonIcon /> : <SunIcon />}
         </button>
         {!user ? (

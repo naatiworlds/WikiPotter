@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Characters, { loaderCharacters } from "../pages/Characters";
-import Books, { loaderBlogs } from "../pages/Books";
+import Books, { loaderBooks } from "../pages/Books";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
-import Book, { loaderPosts } from "../pages/Book";
+import Book, { loaderBook } from "../pages/Book";
 import Contacto from "../pages/Contacto";
 import Character, { loaderCharacter } from "../pages/Character";
 
@@ -36,17 +36,16 @@ export const router = createBrowserRouter([
           {
             path: "/books",
             element: <Books />,
-            loader: loaderBlogs,
+            loader: loaderBooks,
           },
           {
             path: "/book/:index", // Asegúrate de que el parámetro sea `id`
             element: <Book />,
-            loader: loaderPosts,
+            loader: loaderBook,
           },
           {
             path: "/contacto", // Asegúrate de que el parámetro sea `id`
             element: <Contacto />,
-            loader: loaderPosts,
           },
         ],
       },

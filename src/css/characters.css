@@ -1,37 +1,66 @@
-/* Contenedor de la lista de personajes */
-.characters-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Cada elemento de la lista */
-  .character-item {
-    margin: 1rem; /* Similar a `m-2` de Bootstrap */
-  }
-  
-  /* Estilo de las imágenes dentro de los enlaces */
-  .character-item img {
-    width: 100%; /* Hace que la imagen ocupe todo el espacio disponible dentro del contenedor */
-    height: auto;
-    max-width: 150px; /* Ajusta el tamaño máximo de las imágenes */
-    border-radius: 8px; /* Bordes redondeados */
-    transition: transform 0.3s ease; /* Transición suave al hacer hover */
-  }
-  
-  /* Hover sobre las imágenes */
-  .character-item img:hover {
-    transform: scale(1.1); /* Agranda la imagen ligeramente en hover */
-  }
-  
-  /* Estilo para cuando no haya personajes */
-  .no-characters {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #888; /* Color gris claro */
-  }
-  
+/* General container styles */
+.characters-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* List styles */
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em;
+  list-style: none;
+  padding: 0;
+  margin: var(--margin-spacing-components);
+}
+
+.item-child-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--width-cards);
+  padding: 1em;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: var(--shadow-marked);
+}
+
+.item-child-list img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Relación cuadrada para personajes */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* No characters message */
+.no-characters {
+  font-size: var(--text-m);
+  color: #666;
+}
+
+/* Pagination styles */
+.pagination {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

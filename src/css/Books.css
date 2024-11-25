@@ -8,65 +8,95 @@
     margin: var(--margin-spacing-components);
 }
 
-.item-list .item-child-list {
+.item-child-list {
     display: flex;
     flex-direction: column; /* Alineación vertical para imagen y texto */
     justify-content: space-between;
-    align-items: stretch; /* Alinea todo al centro horizontal */
+    align-items: stretch;
     width: var(--width-cards); /* Tamaño uniforme para cada elemento */
-    height: auto; /* Proporción uniforme */
     padding: 1em; /* Espaciado interno */
-    background-color: #f9f9f9; /* Fondo opcional para resaltar el contenido */
-    border: 1px solid #ddd; /* Bordes opcionales para separación */
-    border-radius: 8px; /* Bordes redondeados opcionales */
-    box-shadow: var(--shadow-marked); /* Sombra opcional para darle estilo */
+    background-color: #f9f9f9; /* Fondo para resaltar el contenido */
+    border: 1px solid #ddd; /* Bordes para separación */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: var(--shadow-marked); /* Sombra opcional */
 }
 
-.item-list .item-child-list img {
+.item-child-list img {
     width: 100%; /* Asegura que la imagen llene su contenedor */
     height: auto; /* Mantiene la proporción */
-    aspect-ratio: 3 / 4; /* Relación de aspecto para todas las imágenes */
-    object-fit: fill; /* Recorta la imagen si no se ajusta perfectamente */
-    border-radius: 4px; /* Redondea las esquinas para un diseño uniforme */
+    aspect-ratio: 3 / 4; /* Relación de aspecto uniforme */
+    object-fit: fill; /* Ajusta la imagen */
+    border-radius: 4px; /* Redondea las esquinas */
 }
 
-.item-list .item-child-list figcaption {
-    margin: 0.5em auto; /* Espacio uniforme entre la imagen y el texto */
+.item-child-list figcaption {
+    margin: 0.5em auto; /* Espacio entre la imagen y el texto */
     font-weight: var(--text-bold);
-    text-align: center; /* Centra el texto debajo de la imagen */
-    color: #333; /* Color del texto */
-    font-size: var(--text-m); /* Tamaño de fuente uniforme */
-    width: 100%;
+    text-align: center; /* Centra el texto */
+    color: #333;
+    font-size: var(--text-m); /* Tamaño de fuente */
 }
 
-.item-list .item-child-list span {
-    margin-top: var(--margin-top-components); /* Espacio uniforme entre la imagen y el texto */
+.item-child-list span {
+    margin-top: var(--margin-top-components);
     font-weight: bold;
-    text-align: right; /* Centra el texto debajo de la imagen */
-    font-size: var(--text-s); /* Tamaño de fuente uniforme */
-    width: 100%;
+    text-align: right; /* Alineación del texto a la derecha */
+    font-size: var(--text-s); /* Tamaño de fuente */
 }
-.item-display{
+
+.item-display {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 1em;
     flex-wrap: wrap;
-    align-content: center;
     align-items: center;
 }
-.item-display .item-portrait{
+
+.item-portrait {
     margin: var(--margin-portrait);
 }
-.item-display .item-description{
+
+.item-description {
     margin: var(--margin-description);
-    width: 50%;
+    width: 50%; /* Ancho fijo para la descripción */
 }
 
-.item-display .item-description .childrens{
+.item-description .childrens {
     list-style: none;
     margin-left: var(--margin-left-components);
 }
-.item-display .item-description .childrens li::before{
-    content: "- ";
+
+.item-description .childrens li::before {
+    content: "- "; /* Prefijo para los ítems */
+}
+
+.pagination {
+    margin: var(--margin-spacing-components);
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.books-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

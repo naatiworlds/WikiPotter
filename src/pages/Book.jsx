@@ -1,5 +1,5 @@
 import { NavLink, useLoaderData } from "react-router-dom";
-import "../css/Books.css"
+import "../css/index.css"
 const Book = () => {
   const { post } = useLoaderData();
 
@@ -21,7 +21,7 @@ const Book = () => {
 
 export default Book;
 
-export const loaderPosts = async ({ params }) => {
+export const loaderBook = async ({ params }) => {
   try {
     const response = await fetch(
       `https://potterapi-fedeperin.vercel.app/es/books?search${params.id}`
