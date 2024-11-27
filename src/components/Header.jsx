@@ -36,7 +36,7 @@ const Header = () => {
       </h1>
       <div>
         <select name="themes" id="">
-          <option value="" disabled={true} selected={true}>
+          <option value="" disabled={true}>
             Temas
           </option>
           <optgroup>
@@ -54,9 +54,14 @@ const Header = () => {
             <UserNotLoginIcon />
           </button>
         ) : (
-          <button className="login" onClick={() => logout()}>
-            {<UserLoginIcon />}
-          </button>
+          <>
+            <button className="login" onClick={logout}>
+              <UserLoginIcon />
+            </button>
+            <NavLink to="/profile">
+              <button className="profile-link">Perfil</button>
+            </NavLink>
+          </>
         )}
         {showLogin && <LoginRegister onClose={() => setShowLogin(false)} />}
       </div>
