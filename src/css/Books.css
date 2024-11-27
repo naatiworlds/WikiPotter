@@ -21,7 +21,7 @@
     box-shadow: var(--shadow-marked); /* Sombra opcional */
 }
 
-.item-child-list img {
+.books-container .item-list .item-child-list img {
     width: 100%; /* Asegura que la imagen llene su contenedor */
     height: auto; /* Mantiene la proporción */
     aspect-ratio: 3 / 4; /* Relación de aspecto uniforme */
@@ -29,7 +29,7 @@
     border-radius: 4px; /* Redondea las esquinas */
 }
 
-.item-child-list figcaption {
+.books-container .item-list .item-child-list figcaption {
     margin: 0.5em auto; /* Espacio entre la imagen y el texto */
     font-weight: var(--text-bold);
     text-align: center; /* Centra el texto */

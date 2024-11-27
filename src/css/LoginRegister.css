@@ -86,11 +86,15 @@ form {
 .card-front p, .card-back p {
   margin-top: 20px;
   font-size: 14px;
-  color: #333;
+  color: var(--bg-dark);
 }
 
 .card-front span, .card-back span {
   color: #007bff;
   cursor: pointer;
   text-decoration: underline;
+}
+.card-front .error, .card-back .error {
+  color: red;
+  font-weight: var(--text-bold);
 }

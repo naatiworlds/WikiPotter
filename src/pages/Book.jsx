@@ -11,8 +11,6 @@ const Book = () => {
       <div className="item-description">
         <h1>{post.title}</h1>
         <p>{post.description}</p> {/* Ajusta según los datos reales */}
-        
-        
         <NavLink to="/books">⬅️ Volver</NavLink>
       </div>
     </div>

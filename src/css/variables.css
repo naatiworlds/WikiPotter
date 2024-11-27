@@ -1,38 +1,39 @@
-:root{
-    /* Theme-light */
-    --bg-light: #fff;
-    --color-light: #000;
-    /* Theme-dark */
-    --bg-dark: #333;
-    --color-dark: #fff;
+:root {
+  /* Theme-light */
+  --bg-light: #fff;
+  --color-light: #000;
+  /* Theme-dark */
+  --bg-dark: #333;
+  --color-dark: #fff;
 
-    /* Spacing */
-    --margin-spacing-components: 1em auto;
-    --margin-top-components: 0.5em;
-    --margin-left-components: 0.5em;
-    --margin-portrait: 3em;
-    --margin-description: 5em;
+  /* Spacing */
+  --margin-spacing-components: 1em auto;
+  --margin-top-components: 0.5em;
+  --margin-left-components: 0.5em;
+  --margin-portrait: 3em;
+  --margin-description: 5em;
 
-    /* Font */
-    --font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    --text-xl: 2em;
-    --text-l: 1.5em;
-    --text-m: 1em;
-    --text-s: 0.8em;
-    /* ---------- */
-    --text-bold: bold;
-    --text-semi-bold: 300;
+  /* Font */
+  --font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  --text-xl: 2em;
+  --text-l: 1.5em;
+  --text-m: 1em;
+  --text-s: 0.8em;
+  /* ---------- */
+  --text-bold: bold;
+  --text-semi-bold: 300;
 
-    /* Lists */
-    --width-cards: 220px;
-    --gaps: 1em;
+  /* Lists */
+  --width-cards: 220px;
+  --gaps: 1em;
 
-    /* shadows */
-    --shadow-marked: 0 2px 4px rgba(0, 0, 0, 1);
+  /* shadows */
+  --shadow-marked: 0 2px 4px rgba(0, 0, 0, 1);
 
-    /* Hogwarts houses */
-    --gryffindor-bg: url('/images/gryffindor.jpg');
-  --hufflepuff-bg: url('/images/hufflepuff.jpg');
-  --ravenclaw-bg: url('/images/ravenclaw.jpg');
-  --slytherin-bg: url('/images/slytherin.jpg');
+  /* Hogwarts houses */
+  --gryffindor-bg: url("/images/gryffindor.jpg");
+  --hufflepuff-bg: url("/images/hufflepuff.jpg");
+  --ravenclaw-bg: url("/images/ravenclaw.jpg");
+  --slytherin-bg: url("/images/slytherin.jpg");
 }
