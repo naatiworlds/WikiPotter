@@ -15,8 +15,6 @@
     align-items: stretch;
     width: var(--width-cards); /* Tamaño uniforme para cada elemento */
     padding: 1em; /* Espaciado interno */
-    background-color: #f9f9f9; /* Fondo para resaltar el contenido */
-    border: 1px solid #ddd; /* Bordes para separación */
     border-radius: 8px; /* Bordes redondeados */
     box-shadow: var(--shadow-marked); /* Sombra opcional */
 }
@@ -33,7 +31,6 @@
     margin: 0.5em auto; /* Espacio entre la imagen y el texto */
     font-weight: var(--text-bold);
     text-align: center; /* Centra el texto */
-    color: #333;
     font-size: var(--text-m); /* Tamaño de fuente */
 }
 
@@ -81,12 +78,10 @@
 .pagination button {
     padding: 5px 10px;
     border: 1px solid #ccc;
-    background-color: white;
     cursor: pointer;
 }
 
 .pagination button.active {
-    background-color: #007bff;
     color: white;
 }
 

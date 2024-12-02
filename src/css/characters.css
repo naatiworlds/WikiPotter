@@ -22,7 +22,6 @@
   align-items: center;
   width: var(--width-cards);
   padding: 1em;
-  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: var(--shadow-marked);
@@ -38,7 +37,6 @@
 /* No characters message */
 .no-characters {
   font-size: var(--text-m);
-  color: #666;
 }
 
 /* Pagination styles */
@@ -51,13 +49,11 @@
 .pagination button {
   padding: 5px 10px;
   border: 1px solid #ccc;
-  background-color: white;
   cursor: pointer;
 }
 
 .pagination button.active {
   background-color: #007bff;
-  color: white;
 }
 
 .pagination button:disabled {
