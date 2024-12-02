@@ -1,16 +1,16 @@
-/* eslint-disable react-refresh/only-export-components */
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
+import BooksList from "../components/BooksList";
 import "../css/index.css";
 
 const Books = () => {
-  const { books } = useLoaderData();
+  const { books } = useLoaderData(); // Asegúrate de que este sea un array de libros
 
-  // Estado para la página actual y configuración de paginación
+  // Estado para manejar la página actual
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Libros por página
 
-  // Calcular los índices para cortar los libros
+  // Calcular los índices para paginar
   const totalPages = Math.ceil(books.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -25,26 +25,12 @@ const Books = () => {
 
   return (
     <div className="books-container">
-      <ul className="item-list">
-        {visibleBooks.length > 0 ? (
-          visibleBooks.map((book) => (
-            <li className="item-child-list" key={book.index}>
-              <Link to={`/book/${book.index}`}>
-                <img src={book.cover} alt="portada del libro" />
-              </Link>
-              <figcaption>{book.title}</figcaption>
-              <span>{book.releaseDate}</span>
-            </li>
-          ))
-        ) : (
-          <li>No hay books</li>
-        )}
-      </ul>
+      <BooksList className="item-list" books={visibleBooks} />
 
       {/* Controles de Paginación */}
       <div className="pagination">
-        <button 
-          onClick={() => handlePageChange(currentPage - 1)} 
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
           Previous
@@ -70,21 +56,3 @@ const Books = () => {
 };
 
 export default Books;
-
-export const loaderBooks = async () => {
-  try {
-    const response = await fetch(
-      "https://potterapi-fedeperin.vercel.app/es/books"
-    );
-
-    if (!response.ok) {
-      throw new Error("Error al cargar los blogs");
-    }
-
-    const books = await response.json();
-    return { books };
-  } catch (error) {
-    console.error(error);
-    return { books: [] }; // Retorna un array vacío en caso de error
-  }
-};

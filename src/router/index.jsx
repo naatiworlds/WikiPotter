@@ -20,12 +20,12 @@ const Contacto = lazy(() => import("../pages/Contacto"));
 const Character = lazy(() => import("../pages/Character"));
 
 // Importar los loaders
-import { loaderCharacters } from "../pages/Characters";
-import { loaderBooks } from "../pages/Books";
 import { loaderBook } from "../pages/Book";
 import { loaderCharacter } from "../pages/Character";
 import LayoutPrivate from "../layouts/LayoutPrivate";
 import Profile from "../pages/Profile";
+import { LoaderCharacters } from "../components/LoaderCharacters";
+import { LoaderBooks } from "../components/LoaderBooks";
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
           {
             path: "/characters",
             element: <Characters />,
-            loader: loaderCharacters,
+            loader: LoaderCharacters,
           },
           {
             path: "/character/:nickname",
@@ -53,12 +53,12 @@ export const router = createBrowserRouter([
           {
             path: "/books",
             element: <Books />,
-            loader: loaderBooks,
+            loader: LoaderBooks,
           },
           {
-            path: "/book/:index", // Asegúrate de que el parámetro sea `id`
+            path: "/book/:title",
             element: <Book />,
-            loader: loaderBook,
+            loader: loaderBook,  // Este es el loader corregido
           },
           {
             path: "/contacto",

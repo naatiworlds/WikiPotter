@@ -1,7 +1,8 @@
-/* eslint-disable react-refresh/only-export-components */
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import "../css/index.css"; 
+import CharactersList from "../components/CharactersList";
+
 const Characters = () => {
   const { characters } = useLoaderData();
 
@@ -24,19 +25,8 @@ const Characters = () => {
 
   return (
     <div className="characters-container">
-      <ul className="item-list">
-        {visibleCharacters.length > 0 ? (
-          visibleCharacters.map((character) => (
-            <li className="item-child-list" key={character.index}>
-              <Link to={`/character/${character.nickname}`}>
-                <img src={character.image} alt={character.nickname} />
-              </Link>
-            </li>
-          ))
-        ) : (
-          <li className="no-characters">No hay personajes disponibles</li>
-        )}
-      </ul>
+      {/* Usar el componente CharactersList */}
+      <CharactersList className="item-list" characters={visibleCharacters} />
 
       {/* Controles de Paginación */}
       <div className="pagination">
@@ -67,21 +57,3 @@ const Characters = () => {
 };
 
 export default Characters;
-
-export const loaderCharacters = async () => {
-  try {
-    const response = await fetch(
-      "https://potterapi-fedeperin.vercel.app/es/characters"
-    );
-
-    if (!response.ok) {
-      throw new Error("Error al cargar los personajes");
-    }
-
-    const characters = await response.json();
-    return { characters };
-  } catch (error) {
-    console.error(error);
-    return { characters: [] }; // Retorna un array vacío en caso de error
-  }
-};

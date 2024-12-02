@@ -35,10 +35,12 @@ const Header = () => {
         <NavLink to="/">WikiPotter</NavLink>
       </h1>
       <div>
-        <select name="themes" id="">
-          <option value="" disabled={true}>
-            Temas
-          </option>
+        <select name="themes" className="theme-selector">
+          <optgroup>
+            <option value="" disabled={true}>
+              Temas
+            </option>
+          </optgroup>
           <optgroup>
             <option value="griffindor">Griffindor</option>
             <option value="hufflepuff">Hufflepuff</option>
