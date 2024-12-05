@@ -30,7 +30,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
@@ -41,6 +40,7 @@
 /* Frente de la tarjeta (Login) */
 .card-front {
   transform: rotateY(0deg);
+
 }
 
 /* Parte trasera de la tarjeta (Registro) */
@@ -62,7 +62,8 @@ form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%;
+  width: 90%;
+  
 }
 
 .card-front input,
