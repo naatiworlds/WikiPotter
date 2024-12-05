@@ -1,4 +1,4 @@
-.welcome-text{
+.welcome-text {
   text-align: center;
 }
 .presentation {
@@ -53,7 +53,6 @@
 }
 .content .featured-characters .item-child-list img {
   aspect-ratio: 3 / 4;
-  width: 100%;
   object-fit: fill;
 }
 .content .hogwarts-houses {
@@ -82,24 +81,6 @@
   .content .hogwarts-houses .featured-houses .item-child-list {
     width: 30%;
   }
-}
-
-@media (max-width: 1000px) {
-  .content .featured-characters {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .content .featured-characters .item-child-list {
-    flex-direction: column;
-  }
-  .content .featured-books {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
-@media (max-width: 1050px) {
   .content .hogwarts-houses {
     flex-direction: column;
     justify-content: center;
@@ -112,5 +93,25 @@
     width: 100%;
     margin: 0 0 2em 0;
     padding: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .content .featured-characters {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .content .featured-characters .item-child-list {
+    flex-direction: column;
+    width: var(--width-cards);
+  }
+  .content .featured-characters .item-child-list .dates {
+    width: 100%;
+  }
+  .content .featured-books {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
