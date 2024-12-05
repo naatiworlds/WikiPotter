@@ -6,13 +6,13 @@ const NavBar = () => {
     <nav className="navbar-custom">
       <div className="container">
         <NavLink to="/" className="nav-link">
-          Home
+          Inicio
         </NavLink>
         <NavLink to="/books" className="nav-link">
-          Books
+          Libros
         </NavLink>
         <NavLink to="/characters" className="nav-link">
-          Characters
+          Personajes
         </NavLink>
       </div>
     </nav>

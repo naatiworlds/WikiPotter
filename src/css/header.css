@@ -1,14 +1,14 @@
-header {
+.header-custom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
   align-items: center;
 }
-header a {
+.header-custom a {
   text-decoration: none;
 }
-.login {
+.header-custom .login {
   padding: 10px;
   font-size: 16px;
   color: #fff;
@@ -21,21 +21,38 @@ header a {
   cursor: pointer;
 }
 
-.login:hover {
+.header-custom .login:hover {
   background-color: #0056b3;
 }
-header div {
+.header-custom .header-inputs {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
-header div .theme-selector {
-  padding: 10px;
+.header-custom div select {
+  padding: 10px 0;
   font-size: 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  background: none;
   border: none;
   cursor: pointer;
 }
 
+@media (max-width: 500px){
+  .header-custom{
+    flex-direction: column;
+    
+  }
+  .header-custom .header-inputs {
+    gap: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .header-custom div select{
+    font-size: 1rem;
+  }
+  
+}

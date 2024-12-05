@@ -2,19 +2,41 @@ import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import BooksList from "../components/BooksList";
 import "../css/index.css";
+import ShearchBooks from "../components/ShearchBooks";
 
 const Books = () => {
-  const { books } = useLoaderData(); // Asegúrate de que este sea un array de libros
+  const { books } = useLoaderData();
+
+  // Estados para el filtro
+  const [searchTitle, setSearchTitle] = useState("");
+  const [searchYear, setSearchYear] = useState("");
+
+  // Obtener el rango de años basado en los libros
+  const years = Array.from(
+    new Set(books.map((book) => new Date(book.releaseDate).getFullYear()))
+  ).sort((a, b) => a - b);
 
   // Estado para manejar la página actual
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // Libros por página
+  const itemsPerPage = 4;
+
+  // Filtrar libros por título y año
+  const filteredBooks = books.filter((book) => {
+    const matchesTitle = book.title
+      .toLowerCase()
+      .includes(searchTitle.toLowerCase());
+    const matchesYear = searchYear
+      ? new Date(book.releaseDate).getFullYear().toString() === searchYear
+      : true;
+
+    return matchesTitle && matchesYear;
+  });
 
   // Calcular los índices para paginar
-  const totalPages = Math.ceil(books.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleBooks = books.slice(startIndex, endIndex);
+  const visibleBooks = filteredBooks.slice(startIndex, endIndex);
 
   // Función para cambiar de página
   const handlePageChange = (page) => {
@@ -25,9 +47,16 @@ const Books = () => {
 
   return (
     <div className="books-container">
+      <ShearchBooks
+        searchTitle={searchTitle}
+        searchYear={searchYear}
+        setSearchTitle={setSearchTitle}
+        setSearchYear={setSearchYear}
+        years={years} // Pasar el rango de años al componente
+      />
+
       <BooksList className="item-list" books={visibleBooks} />
 
-      {/* Controles de Paginación */}
       <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}

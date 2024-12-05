@@ -20,12 +20,12 @@ const Contacto = lazy(() => import("../pages/Contacto"));
 const Character = lazy(() => import("../pages/Character"));
 
 // Importar los loaders
-import { loaderBook } from "../pages/Book";
-import { loaderCharacter } from "../pages/Character";
 import LayoutPrivate from "../layouts/LayoutPrivate";
 import Profile from "../pages/Profile";
-import { LoaderCharacters } from "../components/LoaderCharacters";
-import { LoaderBooks } from "../components/LoaderBooks";
+import { LoaderCharacters } from "../loaders/LoaderCharacters";
+import { LoaderBooks } from "../loaders/LoaderBooks";
+import { loaderCharacter } from "../loaders/LoaderCharacter";
+import { loaderBook } from "../loaders/LoaderBook";
 
 export const router = createBrowserRouter([
   {

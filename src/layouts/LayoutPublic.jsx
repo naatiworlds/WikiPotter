@@ -8,12 +8,15 @@ import Header from "../components/Header";
 const LayoutPublic = () => {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className={theme}>
-      <Header />
-      {/* <main>Main</main> */}
-      <NavBar /> {/* Cambiado a NavBar */}
-      <Outlet />
-      <Footer />
+    <div className={`app-container ${theme}`}>
+      <div className={theme}>
+        <main>
+          <Header />
+          <NavBar />
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };

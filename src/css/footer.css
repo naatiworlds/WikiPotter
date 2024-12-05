@@ -1,13 +1,17 @@
-/* Barra de navegación o contenedor con fondo oscuro y texto blanco */
 .footer-custom {
-  text-align: center; /* text-center */
-  padding-top: 1rem; /* py-3 (la cantidad de 1rem es un buen reemplazo para py-3) */
+  text-align: center;
+  padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-top: auto; /* mt-auto (esto lo usa generalmente en un flexbox para alinear al final) */
   border-top: 1px solid black;
+  background-color: #333; /* Fondo oscuro */
+  color: white; /* Texto blanco */
 }
-.footer-custom ul{
+
+.footer-custom ul {
   display: flex;
   justify-content: center;
   gap: 2em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

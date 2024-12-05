@@ -2,19 +2,33 @@ import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import "../css/index.css"; 
 import CharactersList from "../components/CharactersList";
+import SearchCharacters from "../components/SearchCharacters"; // Nuevo componente para el filtro
 
 const Characters = () => {
   const { characters } = useLoaderData();
 
-  // Estado para manejar la página actual y personajes por página
+  // Estados para filtros y paginación
+  const [searchName, setSearchName] = useState("");
+  const [searchHouse, setSearchHouse] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // Número de personajes por página
+  const itemsPerPage = 8;
 
-  // Calcular los índices para mostrar los personajes actuales
-  const totalPages = Math.ceil(characters.length / itemsPerPage);
+  // Filtrar personajes por nombre y casa
+  const filteredCharacters = characters.filter((character) => {
+    const matchesName = character.fullName
+      .toLowerCase()
+      .includes(searchName.toLowerCase());
+    const matchesHouse =
+      searchHouse === "" || character.hogwartsHouse === searchHouse;
+
+    return matchesName && matchesHouse;
+  });
+
+  // Calcular índices para paginar después del filtro
+  const totalPages = Math.ceil(filteredCharacters.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleCharacters = characters.slice(startIndex, endIndex);
+  const visibleCharacters = filteredCharacters.slice(startIndex, endIndex);
 
   // Función para cambiar de página
   const handlePageChange = (page) => {
@@ -25,10 +39,19 @@ const Characters = () => {
 
   return (
     <div className="characters-container">
-      {/* Usar el componente CharactersList */}
+      {/* Componente para búsqueda y filtros */}
+      <SearchCharacters
+        searchName={searchName}
+        setSearchName={setSearchName}
+        searchHouse={searchHouse}
+        setSearchHouse={setSearchHouse}
+        houses={[...new Set(characters.map((c) => c.hogwartsHouse))]} // Obtener casas únicas
+      />
+
+      {/* Lista de personajes filtrados */}
       <CharactersList className="item-list" characters={visibleCharacters} />
 
-      {/* Controles de Paginación */}
+      {/* Controles de paginación */}
       <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}

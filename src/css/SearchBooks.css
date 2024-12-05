@@ -1,0 +1,32 @@
+.search-container {
+    display: flex;
+    gap: 1rem; /* Espacio entre los elementos */
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem;
+  }
+  
+  .search-container input,
+  .search-container select {
+    flex: 1; /* Ambos elementos ocupan el mismo espacio */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .search-container input {
+    margin-right: 1rem; /* Espacio extra a la derecha del input */
+  }
+  
+  @media (max-width: 768px) {
+    .search-container {
+      flex-direction: column;
+    }
+  
+    .search-container input,
+    .search-container select {
+      margin-right: 0;
+      width: 100%;
+    }
+  }
+  

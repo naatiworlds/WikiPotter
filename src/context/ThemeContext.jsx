@@ -6,7 +6,7 @@ export const ThemeContext = createContext();
 
 // Creamos el proveedor del contexto
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   // Cambiar tema entre "light" y "dark"
   const toggleTheme = () => {

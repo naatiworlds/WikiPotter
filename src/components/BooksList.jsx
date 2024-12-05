@@ -1,11 +1,14 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/index.css";
 
-const BooksList = ({ className,books }) => {
+const BooksList = ({ className, books, limit }) => {
+  // Aplica el límite si se proporciona
+  const limitedBooks = limit ? books.slice(0, limit) : books;
+
   return (
     <ul className={className}>
-      {books.length > 0 ? (
-        books.map((book) => (
+      {limitedBooks.length > 0 ? (
+        limitedBooks.map((book) => (
           <li key={book.index} className="item-child-list">
             <Link to={`/book/${book.title}`}>
               <img src={book.cover} alt="portada" />

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const UserNotLoginIcon = ({ size = 50, color = "#000" }) => (
+const UserNotLoginIcon = ({ size, color }) => (
   <svg
     width={size}
     height={size}

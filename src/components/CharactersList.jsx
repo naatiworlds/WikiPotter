@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
-const CharactersList = ({ className, characters }) => {
+const CharactersList = ({ className, characters, limit }) => {
+  const limitedCharacters = limit ? characters.slice(0, limit) : characters;
+
   return (
     <ul className={className}>
-      {characters.length > 0 ? (
-        characters.map((character) => (
+      {limitedCharacters.length > 0 ? (
+        limitedCharacters.map((character) => (
           <li className="item-child-list" key={character.index}>
             <div className="image">
               <Link to={`/character/${character.nickname}`}>
