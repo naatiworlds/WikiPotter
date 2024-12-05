@@ -104,6 +104,11 @@ const LoginRegister = ({ onClose }) => {
   return (
     <div className="backdrop" onClick={handleBackdropClick}>
       <div className={`card ${isFlipped ? "flipped" : ""}`}>
+        {/* Botón de cierre */}
+        <button className="close-button" onClick={onClose}>
+          &times;
+        </button>
+
         {/* Formulario de Login */}
         <div className="card-front">
           <h2>Login</h2>
