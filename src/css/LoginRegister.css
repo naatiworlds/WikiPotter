@@ -152,7 +152,7 @@ form {
   /* Para pantallas muy pequeñas, como teléfonos */
   .card {
     width: 100%; /* La tarjeta ocupa el 90% del ancho */
-    max-width: 200px; /* Limita aún más el tamaño de la tarjeta */
+    max-width: 300px; /* Limita aún más el tamaño de la tarjeta */
   }
 
   .close-button {
