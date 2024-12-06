@@ -5,7 +5,7 @@ const HousesList = ({ className, houses }) => {
     <ul className={className}>
       {houses.length > 0 ? (
         houses.map((house) => (
-          <li className="item-child-list" key={house.index}>
+          <li className="item-child-list scroller-up" key={house.index}>
             <p><span>{house.emoji}</span>{house.house}</p>
           </li>
         ))

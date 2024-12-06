@@ -7,7 +7,7 @@ const CharactersList = ({ className, characters, limit }) => {
     <ul className={className}>
       {limitedCharacters.length > 0 ? (
         limitedCharacters.map((character) => (
-          <li className="item-child-list" key={character.index}>
+          <li className="item-child-list scroller-up" key={character.index}>
             <div className="image">
               <Link to={`/character/${character.nickname}`}>
                 <img src={character.image} alt={character.nickname} />

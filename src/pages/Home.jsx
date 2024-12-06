@@ -16,14 +16,14 @@ const Home = () => {
       </div>
       <div className="content">
         <h2 className="scroller-right">Libros destacados</h2>
-        <BooksList className="featured-books scroller-up" books={books} limit={3} />
+        <BooksList className="featured-books " books={books} limit={3} />
         <h2 className="scroller-right">Personajes destacados</h2>
         <CharactersList
-          className="featured-characters scroller-up"
+          className="featured-characters "
           characters={characters}
           limit={3}
         />
-        <div className="hogwarts-houses scroller-up">
+        <div className="hogwarts-houses ">
           <h2 className="scroller-up">Casas de HogWarts</h2>
           <HousesList className="featured-houses" houses={houses} />
         </div>

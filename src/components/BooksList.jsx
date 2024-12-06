@@ -9,7 +9,7 @@ const BooksList = ({ className, books, limit }) => {
     <ul className={className}>
       {limitedBooks.length > 0 ? (
         limitedBooks.map((book) => (
-          <li key={book.index} className="item-child-list">
+          <li key={book.index} className="item-child-list scroller-up">
             <Link to={`/book/${book.title}`}>
               <img src={book.cover} alt="portada" />
             </Link>
