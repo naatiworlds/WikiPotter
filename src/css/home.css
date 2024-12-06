@@ -114,6 +114,12 @@
     justify-content: center;
     align-items: center;
   }
+  .scroller-up{
+    display: none;
+  }
+  .scroller-right{
+    display: none;
+  }
 }
 /* Definir un scroll-timeline */
 .scroller-up {
