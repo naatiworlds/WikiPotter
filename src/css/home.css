@@ -114,35 +114,34 @@
     justify-content: center;
     align-items: center;
   }
-  .scroller-up{
-    display: none;
+  .scroller-up {
+    animation-fill-mode: none;
   }
-  .scroller-right{
-    display: none;
+  .scroller-right {
+    animation-name: fade-slide;
   }
 }
-/* Definir un scroll-timeline */
+/* Animación hacia arriba (fade-slide-up) */
 .scroller-up {
   view-timeline-name: --reveal;
-
   animation-name: fade-slide-up;
   animation-fill-mode: both;
-
   animation-timeline: --reveal;
   animation-range: entry 60% cover 50%;
 }
+
+/* Animación hacia la derecha (fade-slide-right) */
 .scroller-right {
   width: 30%;
   margin: 0 auto;
   view-timeline-name: --reveal;
-
   animation-name: fade-slide-right;
   animation-fill-mode: both;
-
   animation-timeline: --reveal;
   animation-range: entry 60% cover 100%;
 }
 
+/* Keyframes para las animaciones */
 @keyframes fade-slide-up {
   0% {
     transform: translateY(50px);
@@ -164,4 +163,34 @@
   }
 }
 
+/* Ajustar las animaciones en pantallas pequeñas */
+@media (max-width: 600px) {
+  /* Reducir los desplazamientos en las animaciones */
+  @keyframes fade-slide-up {
+    0% {
+      transform: translateY(20px); /* Menor desplazamiento */
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
+  @keyframes fade-slide-right {
+    0% {
+      transform: translateX(50px); /* Menor desplazamiento */
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Deshabilitar animaciones en móviles si siguen siendo problemáticas
+  .scroller-up,
+  .scroller-right {
+    animation: none;
+  } */
+}
