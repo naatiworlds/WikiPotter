@@ -115,3 +115,47 @@
     align-items: center;
   }
 }
+/* Definir un scroll-timeline */
+.scroller-up {
+  view-timeline-name: --reveal;
+
+  animation-name: fade-slide-up;
+  animation-fill-mode: both;
+
+  animation-timeline: --reveal;
+  animation-range: entry 60% cover 50%;
+}
+.scroller-right {
+  width: 30%;
+  margin: 0 auto;
+  view-timeline-name: --reveal;
+
+  animation-name: fade-slide-right;
+  animation-fill-mode: both;
+
+  animation-timeline: --reveal;
+  animation-range: entry 60% cover 100%;
+}
+
+@keyframes fade-slide-up {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-slide-right {
+  0% {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+

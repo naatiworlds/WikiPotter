@@ -10,21 +10,21 @@ const Home = () => {
 
   return (
     <>
-      <h2 className="welcome-text">Bienvenido al Mundo Mágico de Harry Potter</h2>
+      <h2 className="welcome-text scroller-right">Bienvenido al Mundo Mágico de Harry Potter</h2>
       <div className="presentation">
         <Welcome />
       </div>
       <div className="content">
-        <h2>Libros destacados</h2>
-        <BooksList className="featured-books" books={books} limit={3} />
-        <h2>Personajes destacados</h2>
+        <h2 className="scroller-right">Libros destacados</h2>
+        <BooksList className="featured-books scroller-up" books={books} limit={3} />
+        <h2 className="scroller-right">Personajes destacados</h2>
         <CharactersList
-          className="featured-characters"
+          className="featured-characters scroller-up"
           characters={characters}
           limit={3}
         />
-        <div className="hogwarts-houses">
-          <h2>Casas de HogWarts</h2>
+        <div className="hogwarts-houses scroller-up">
+          <h2 className="scroller-up">Casas de HogWarts</h2>
           <HousesList className="featured-houses" houses={houses} />
         </div>
       </div>
