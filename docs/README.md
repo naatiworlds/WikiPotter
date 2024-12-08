@@ -1,5 +1,8 @@
 # WikiPotter
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3d452d7e-d770-495b-9964-3d564cdd20b5/deploy-status)](https://wikipotter.netlify.app/) [![Figmaland](https://img.shields.io/badge/Figma-Design-blue)](https://www.figma.com/design/cFGLkQM37f9nZIJogr3RDx/WikiPotter?node-id=0-1&t=LBfrXEABMzzGtwsy-1)
+
 ![Logo de la app](./assets/logo.jpg) 
+
 
 # Índice
 
