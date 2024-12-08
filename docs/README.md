@@ -1,5 +1,5 @@
 # WikiPotter
-![Logo de la app](./public/logo.jpg)
+![Logo de la app](/docs/assets/logo.jpg)
 
 # Índice
 
