@@ -1,0 +1,29 @@
+/* Estilos del hechizo */
+.magic-effect {
+    position: absolute;
+    width: 60px; /* Ajusta el tamaño del brillo */
+    height: 60px;
+    border-radius: 50%; /* Hace que sea un círculo */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); /* Gradiente brillante */
+    pointer-events: none; /* Para evitar interferir con otros elementos */
+    animation: trail 0.5s ease-out infinite; /* Animación del hechizo */
+    transform: translate(-50%, -50%); /* Centrar la imagen en el mouse */
+    z-index: 9999;
+  }
+  
+  /* Animación de la estela del hechizo */
+  @keyframes trail {
+    0% {
+      transform: scale(1) translate(-50%, -50%);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5) translate(-50%, -50%);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(2) translate(-50%, -50%);
+      opacity: 0;
+    }
+  }
+  

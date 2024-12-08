@@ -10,7 +10,9 @@ const Home = () => {
 
   return (
     <>
-      <h2 className="welcome-text scroller-right">Bienvenido al Mundo Mágico de Harry Potter</h2>
+      <h2 className="welcome-text scroller-right">
+        Bienvenido al Mundo Mágico de Harry Potter
+      </h2>
       <div className="presentation">
         <Welcome />
       </div>

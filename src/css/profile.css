@@ -1,0 +1,55 @@
+.profile-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+.profile-container > h2 {
+  text-align: center;
+}
+
+.favorites {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.favorites > div {
+  flex: 1;
+}
+
+.profile-summary {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.character-select {
+  display: flex;
+  gap: 1rem; /* Espacio entre los elementos */
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem;
+}
+
+.character-select input,
+.character-select select {
+  flex: 1; /* Ambos elementos ocupan el mismo espacio */
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.character-select input {
+  margin-right: 1rem; /* Espacio extra a la derecha del input */
+}
+
+@media (max-width: 768px) {
+  .character-select {
+    flex-direction: column;
+  }
+
+  .character-select input,
+  .character-select select {
+    margin-right: 0;
+    width: 100%;
+  }
+}
