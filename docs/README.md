@@ -46,6 +46,8 @@ La diferencia principal de nuestra aplicación será su enfoque en la simplicida
 
 ### **Backend** 🔙:
   - **API de PotterAPI** : Para obtener la información de los libros, personajes y hechizos de Harry Potter, integraremos PotterAPI, una API pública que proporciona datos relacionados con la saga de manera fácil y estructurada.
+  - **Axios**: Una libreria muy útil para realizar nuestras llamadas a la API.
+
 
 ### **Herramientas de Desarrollo** 🛠️:
   - **Git y GitHub**: Usaremos Git para el control de versiones del proyecto, y GitHub para gestionar el código y la colaboración entre los miembros del equipo.

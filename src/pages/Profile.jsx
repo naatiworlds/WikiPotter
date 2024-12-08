@@ -1,16 +1,35 @@
-import { useContext, useEffect, useState } from "react";
-import UseLoader from "../hooks/UseLoader";
-import { UserContext } from "../context/UserContext";
-import Joyride from "react-joyride";
-import { ThemeContext } from "../context/ThemeContext";
+/**
+ * @file Profile.js
+ * @description Este componente representa la página de perfil del usuario, donde pueden elegir su personaje, libro y casa favoritos de la saga de Harry Potter. 
+ * También incluye un tutorial interactivo usando el paquete `react-joyride` para guiar al usuario a través del proceso de selección de favoritos.
+ * 
+ * @dependencies
+ * - `react`: Para crear el componente React.
+ * - `react-router-dom`: Para manejar la navegación y el acceso a rutas.
+ * - `react-joyride`: Para mostrar un tutorial interactivo.
+ * - `UseLoader`: Un hook personalizado que carga los datos de libros, personajes y casas.
+ * - `UserContext`: Contexto para acceder y gestionar los datos del usuario.
+ * - `ThemeContext`: Contexto para gestionar el tema de la interfaz.
+ * - `localStorage`: Para guardar los favoritos del usuario.
+ * 
+ * @returns {JSX.Element} El componente que muestra el perfil del usuario, con la opción de seleccionar favoritos y un tutorial interactivo.
+ * 
+ * @version 1.0
+ * @date 2024
+ */
+
+import { useContext, useEffect, useState } from "react"; // Importación de React hooks
+import UseLoader from "../hooks/UseLoader"; // Hook personalizado para cargar datos
+import { UserContext } from "../context/UserContext"; // Contexto del usuario
+import Joyride from "react-joyride"; // Paquete para el tutorial interactivo
+import { ThemeContext } from "../context/ThemeContext"; // Contexto del tema visual
 
 const Profile = () => {
-  const { books, characters, houses, loading, error } = UseLoader();
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { books, characters, houses, loading, error } = UseLoader(); // Obtener los datos desde el hook UseLoader
+  const { theme } = useContext(ThemeContext); // Obtener el tema actual
+  const { user } = useContext(UserContext); // Obtener el usuario desde el contexto
 
-  const { user } = useContext(UserContext);
-
-  // Recuperar favoritos del localStorage al cargar el componente
+  // Función para obtener los favoritos desde el localStorage
   const getInitialFavorites = () => {
     try {
       const savedFavorites = JSON.parse(localStorage.getItem("favorites"));
@@ -21,32 +40,32 @@ const Profile = () => {
     }
   };
 
-  const [favorites, setFavorites] = useState(getInitialFavorites);
-  const [runTutorial, setRunTutorial] = useState(false);
+  const [favorites, setFavorites] = useState(getInitialFavorites); // Estado para gestionar los favoritos
+  const [runTutorial, setRunTutorial] = useState(false); // Estado para controlar la ejecución del tutorial
 
-  // Sincronizar favoritos con el localStorage al cambiar
+  // Sincronizar los favoritos con el localStorage cuando cambian
   useEffect(() => {
     if (user) {
       const hasCompleteFavorites =
         favorites.character && favorites.book && favorites.house;
 
-      // Guardar favoritos solo si son válidos
+      // Guardar los favoritos solo si son completos
       if (hasCompleteFavorites) {
         localStorage.setItem("favorites", JSON.stringify(favorites));
       }
     }
   }, [favorites, user]);
 
-  // Configurar el tutorial basado en favoritos iniciales
+  // Configuración del tutorial, basado en si los favoritos están completos
   useEffect(() => {
     if (user) {
       const hasCompleteFavorites =
         favorites.character && favorites.book && favorites.house;
-      setRunTutorial(!hasCompleteFavorites);
+      setRunTutorial(!hasCompleteFavorites); // Si no se han seleccionado todos los favoritos, iniciar tutorial
     }
   }, [user, favorites]);
 
-  // Pasos del tutorial
+  // Pasos para el tutorial interactivo
   const steps = [
     {
       target: ".character-select",
@@ -66,22 +85,22 @@ const Profile = () => {
     },
   ];
 
-  // Maneja la selección de los favoritos
+  // Función para manejar la selección de los favoritos
   const handleSelectFavorite = (type, value) => {
     setFavorites((prev) => ({ ...prev, [type]: value }));
   };
 
-  // Si no hay usuario, muestra un mensaje
+  // Mostrar mensaje si no hay usuario
   if (!user) {
     return <p>Inicia sesión para acceder a tu perfil.</p>;
   }
 
-  // Si los datos están cargando, muestra un mensaje
+  // Mostrar mensaje si los datos están cargando
   if (loading) {
     return <p>Cargando datos...</p>;
   }
 
-  // Si hay un error, muestra el mensaje de error
+  // Mostrar mensaje de error si hay algún problema con los datos
   if (error) {
     return <p>{error}</p>;
   }
@@ -90,12 +109,12 @@ const Profile = () => {
     <div className="profile-container">
       <h2>Bienvenido, {user.email}</h2>
 
-      {/* Tutorial de React Joyride */}
+      {/* Tutorial interactivo */}
       <Joyride
-        steps={steps}
+        steps={steps} // Pasos del tutorial
         continuous
         showSkipButton
-        run={runTutorial}
+        run={runTutorial} // Controla si el tutorial se debe ejecutar
         styles={{
           options: {
             arrowColor: "#fff",
@@ -107,11 +126,11 @@ const Profile = () => {
           },
         }}
         callback={(data) => {
-          if (data.status === "finished") setRunTutorial(false);
+          if (data.status === "finished") setRunTutorial(false); // Detener tutorial cuando se termine
         }}
       />
 
-      {/* Sección para elegir favoritos */}
+      {/* Sección para seleccionar favoritos */}
       <div className="favorites">
         <div className="character-select">
           <h3>Personaje Favorito</h3>
@@ -129,7 +148,7 @@ const Profile = () => {
           </select>
         </div>
 
-        <div className="character-select">
+        <div className="book-select">
           <h3>Libro Favorito</h3>
           <select
             className={`select-theme ${theme}`}
@@ -145,7 +164,7 @@ const Profile = () => {
           </select>
         </div>
 
-        <div className="character-select">
+        <div className="house-select">
           <h3>Casa Favorita</h3>
           <select
             className={`select-theme ${theme}`}

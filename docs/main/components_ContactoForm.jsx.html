@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/ContactoForm.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/ContactoForm.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file ContactoForm.jsx
+ * @description Componente de formulario de contacto que permite a los usuarios enviar información, incluyendo validación en tiempo real y alertas al completar correctamente el formulario.
+ * @author [Tu Nombre]
+ * @date [Fecha de creación]
+ * @version 1.0
+ */
+
+import { useState } from "react";
+import "../css/Contact-form.css";
+import Swal from "sweetalert2";
+
+/**
+ * @component ContactoForm
+ * @description Formulario de contacto con validación en tiempo real. Recoge el nombre de usuario, correo electrónico y un mensaje (asunto). Utiliza validaciones estrictas para asegurar la entrada correcta del usuario.
+ * @returns {JSX.Element} El formulario de contacto con campos validados.
+ */
+const ContactoForm = () => {
+  // Estado para los datos del formulario
+  const [contactoData, setContactoData] = useState({
+    username: "",
+    email: "",
+    asunto: "",
+  });
+
+  // Estado para los errores de validación
+  const [errors, setErrors] = useState({
+    username: "",
+    email: "",
+    asunto: "",
+  });
+
+  /**
+   * Valida un campo individual del formulario.
+   * @param {string} name - Nombre del campo (username, email, asunto).
+   * @param {string} value - Valor actual del campo.
+   * @returns {string} Mensaje de error si hay validación fallida; vacío si es válido.
+   */
+  const validateField = (name, value) => {
+    switch (name) {
+      case "username":
+        if (!/^[a-zA-Z0-9_]{3,15}$/.test(value)) {
+          return "Debe tener entre 3 y 15 caracteres alfanuméricos o guiones bajos.";
+        }
+        break;
+      case "email":
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          return "Introduce un correo electrónico válido.";
+        }
+        break;
+      case "asunto":
+        if (value.length &lt; 10 || value.length > 300) {
+          return "Debe tener entre 10 y 300 caracteres.";
+        }
+        break;
+      default:
+        break;
+    }
+    return "";
+  };
+
+  /**
+   * Maneja los cambios en los campos del formulario.
+   * @param {Object} e - Evento del input.
+   */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContactoData({ ...contactoData, [name]: value });
+
+    // Validar en tiempo real
+    setErrors({ ...errors, [name]: validateField(name, value) });
+  };
+
+  /**
+   * Maneja el envío del formulario, valida todos los campos y muestra un mensaje de éxito.
+   * @param {Object} e - Evento del formulario.
+   */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = {
+      username: validateField("username", contactoData.username),
+      email: validateField("email", contactoData.email),
+      asunto: validateField("asunto", contactoData.asunto),
+    };
+
+    setErrors(newErrors);
+
+    // Si no hay errores, procesar el envío
+    if (!Object.values(newErrors).some((error) => error)) {
+      Swal.fire({
+        title: "Enviado con éxito",
+        text: `Tu mensaje, ${contactoData.username}, ha sido enviado con éxito!`,
+        icon: "success",
+      });
+      setContactoData({ username: "", email: "", asunto: "" });
+    }
+  };
+
+  return (
+    &lt;div className="contact-form">
+      &lt;h2>Contacto&lt;/h2>
+      &lt;form onSubmit={handleSubmit}>
+        {/* Campo de nombre de usuario */}
+        &lt;input
+          type="text"
+          name="username"
+          placeholder="Usuario"
+          className="form-control mb-2"
+          value={contactoData.username}
+          onChange={handleChange}
+        />
+        {errors.username &amp;&amp; &lt;small className="text-danger">{errors.username}&lt;/small>}
+
+        {/* Campo de correo electrónico */}
+        &lt;input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className="form-control mb-2"
+          value={contactoData.email}
+          onChange={handleChange}
+        />
+        {errors.email &amp;&amp; &lt;small className="text-danger">{errors.email}&lt;/small>}
+
+        {/* Campo de asunto */}
+        &lt;textarea
+          name="asunto"
+          placeholder="Escribe tu petición"
+          className="form-control mb-2"
+          value={contactoData.asunto}
+          onChange={handleChange}
+        />
+        {errors.asunto &amp;&amp; &lt;small className="text-danger">{errors.asunto}&lt;/small>}
+
+        {/* Botón de envío */}
+        &lt;button type="submit" className="btn btn-primary mt-2">
+          Enviar
+        &lt;/button>
+      &lt;/form>
+    &lt;/div>
+  );
+};
+
+export default ContactoForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#CharactersList">CharactersList</a></li><li><a href="global.html#ContactoForm">ContactoForm</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HousesList">HousesList</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#LoginRegister">LoginRegister</a></li><li><a href="global.html#MagicEffect">MagicEffect</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#SearchBooks">SearchBooks</a></li><li><a href="global.html#SearchCharacters">SearchCharacters</a></li><li><a href="global.html#ThemeIcon">ThemeIcon</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UseLoader">UseLoader</a></li><li><a href="global.html#UserLoginIcon">UserLoginIcon</a></li><li><a href="global.html#UserNotLoginIcon">UserNotLoginIcon</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#firebaseLogin">firebaseLogin</a></li><li><a href="global.html#firebaseLogout">firebaseLogout</a></li><li><a href="global.html#firebaseRegistro">firebaseRegistro</a></li><li><a href="global.html#onAuthStateListener">onAuthStateListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 08 2024 19:25:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

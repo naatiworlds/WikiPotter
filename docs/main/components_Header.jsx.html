@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Header.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Header.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Header.jsx
+ * @description Componente principal de la cabecera que incluye navegación, gestión de usuario y selección de tema.
+ * @author Natalia
+ * @date 
+ * @version 1.0
+ */
+
+import { useContext, useState, useEffect } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import { UserContext } from "../context/UserContext";
+import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
+
+import ThemeIcon from "./ThemeIcon";
+import UserLoginIcon from "./UserLoginIcon";
+import UserNotLoginIcon from "./UserNotLoginIcon";
+import LoginRegister from "./LoginRegister";
+
+import "../css/header.css";
+
+/**
+ * @component Header
+ * @description Componente que representa la cabecera de la aplicación. Gestiona el tema, el estado del usuario y la navegación.
+ * @returns {JSX.Element} Cabecera de la aplicación.
+ */
+const Header = () => {
+  // Contextos para acceder a información global
+  const { user, setUser } = useContext(UserContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  // Estados locales
+  const [showLogin, setShowLogin] = useState(false);
+
+  /**
+   * @description Recupera el usuario del `localStorage` al montar el componente.
+   */
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Restaura el estado del usuario
+    }
+  }, [setUser]);
+
+  /**
+   * @description Sincroniza el usuario con `localStorage` al cambiar.
+   */
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user"); // Limpia el almacenamiento al cerrar sesión
+    }
+  }, [user]);
+
+  /**
+   * @description Maneja el cierre de sesión del usuario, incluyendo una alerta de confirmación.
+   */
+  const logout = () => {
+    setUser(null);
+    Swal.fire({
+      icon: "warning",
+      title: "Cierre de sesión",
+      text: "Has cerrado sesión correctamente.",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+  };
+
+  /**
+   * @description Determina el color del icono basado en el estado del usuario y el tema actual.
+   */
+  const iconColor = user
+    ? "#1E90FF" // Azul si el usuario está logueado
+    : theme === "dark"
+    ? "#FFF" // Blanco en tema oscuro
+    : "#333"; // Negro en tema claro
+
+  /**
+   * @description Oculta el formulario de login si el usuario ya está logueado.
+   */
+  useEffect(() => {
+    if (user) {
+      setShowLogin(false);
+    }
+  }, [user]);
+
+  return (
+    &lt;header className="header-custom">
+      &lt;h1>
+        &lt;NavLink to="/">WikiPotter&lt;/NavLink>
+      &lt;/h1>
+      &lt;div className="header-inputs">
+        {/* Selector de temas */}
+        &lt;select name="themes" className={`select-theme ${theme}`}>
+          &lt;optgroup>
+            &lt;option value="" disabled={true}>
+              Temas
+            &lt;/option>
+          &lt;/optgroup>
+          &lt;optgroup>
+            &lt;option value="griffindor">Griffindor&lt;/option>
+            &lt;option value="hufflepuff">Hufflepuff&lt;/option>
+            &lt;option value="ravenclaw">Ravenclaw&lt;/option>
+            &lt;option value="slytherin">Slytherin&lt;/option>
+          &lt;/optgroup>
+        &lt;/select>
+
+        {/* Botón para alternar entre temas */}
+        &lt;button className="login" onClick={toggleTheme}>
+          &lt;ThemeIcon size={50} color={"#FFA500"} />
+        &lt;/button>
+
+        {/* Gestión del usuario: login o perfil */}
+        {!user ? (
+          &lt;button className="login" onClick={() => setShowLogin(true)}>
+            &lt;UserNotLoginIcon size={50} color={iconColor} />
+          &lt;/button>
+        ) : (
+          &lt;>
+            &lt;button className="login" onClick={logout}>
+              &lt;UserLoginIcon size={50} color={iconColor} />
+            &lt;/button>
+            &lt;NavLink to="/profile">
+              &lt;button className="login">Perfil&lt;/button>
+            &lt;/NavLink>
+          &lt;/>
+        )}
+
+        {/* Formulario de login */}
+        {showLogin &amp;&amp; &lt;LoginRegister onClose={() => setShowLogin(false)} />}
+      &lt;/div>
+    &lt;/header>
+  );
+};
+
+export default Header;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#CharactersList">CharactersList</a></li><li><a href="global.html#ContactoForm">ContactoForm</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HousesList">HousesList</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#LoginRegister">LoginRegister</a></li><li><a href="global.html#MagicEffect">MagicEffect</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#SearchBooks">SearchBooks</a></li><li><a href="global.html#SearchCharacters">SearchCharacters</a></li><li><a href="global.html#ThemeIcon">ThemeIcon</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UseLoader">UseLoader</a></li><li><a href="global.html#UserLoginIcon">UserLoginIcon</a></li><li><a href="global.html#UserNotLoginIcon">UserNotLoginIcon</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#firebaseLogin">firebaseLogin</a></li><li><a href="global.html#firebaseLogout">firebaseLogout</a></li><li><a href="global.html#firebaseRegistro">firebaseRegistro</a></li><li><a href="global.html#onAuthStateListener">onAuthStateListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 08 2024 19:25:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

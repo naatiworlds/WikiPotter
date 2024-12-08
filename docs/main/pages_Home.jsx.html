@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Home.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Home.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Home.js
+ * @description Este componente representa la página de inicio (Home) de la aplicación. En la página de inicio,
+ * se muestran varios bloques de contenido destacados, incluyendo libros, personajes y casas de Hogwarts. Los 
+ * datos de estos bloques son cargados a través de un hook personalizado `UseLoader`.
+ * 
+ * @dependencies
+ * - `../components/CharactersList`: Componente que maneja la visualización de la lista de personajes.
+ * - `../components/Welcome`: Componente que muestra un mensaje de bienvenida.
+ * - `../components/BooksList`: Componente que maneja la visualización de la lista de libros.
+ * - `../components/HousesList`: Componente que maneja la visualización de las casas de Hogwarts.
+ * - `../hooks/UseLoader`: Hook personalizado para cargar los datos necesarios (libros, personajes, casas).
+ * - `../css/index.css`: Archivo de estilos que aplica el diseño global a la página.
+ * 
+ * @returns {JSX.Element} Un componente que muestra la interfaz de inicio con bloques destacados.
+ * 
+ * @version 1.0
+ * @date 2024
+ */
+
+import CharactersList from "../components/CharactersList"; // Componente para mostrar los personajes
+import Welcome from "../components/Welcome"; // Componente de bienvenida
+import "../css/index.css"; // Estilos globales
+import BooksList from "../components/BooksList"; // Componente para mostrar los libros
+import HousesList from "../components/HousesList"; // Componente para mostrar las casas de Hogwarts
+import UseLoader from "../hooks/UseLoader"; // Hook personalizado para cargar los datos
+
+const Home = () => {
+  // Usamos el hook UseLoader para cargar los datos de libros, personajes y casas
+  const { books, characters, houses } = UseLoader();
+
+  return (
+    &lt;>
+      {/* Título de bienvenida */}
+      &lt;h2 className="welcome-text scroller-right">
+        Bienvenido al Mundo Mágico de Harry Potter
+      &lt;/h2>
+
+      {/* Sección de bienvenida con el componente Welcome */}
+      &lt;div className="presentation">
+        &lt;Welcome />
+      &lt;/div>
+
+      {/* Contenido destacado */}
+      &lt;div className="content">
+        {/* Sección de libros destacados */}
+        &lt;h2 className="scroller-right">Libros destacados&lt;/h2>
+        &lt;BooksList className="featured-books" books={books} limit={3} />
+
+        {/* Sección de personajes destacados */}
+        &lt;h2 className="scroller-right">Personajes destacados&lt;/h2>
+        &lt;CharactersList
+          className="featured-characters"
+          characters={characters}
+          limit={3}
+        />
+
+        {/* Sección de casas de Hogwarts */}
+        &lt;div className="hogwarts-houses">
+          &lt;h2 className="scroller-up">Casas de HogWarts&lt;/h2>
+          &lt;HousesList className="featured-houses" houses={houses} />
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
+  );
+};
+
+export default Home;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#CharactersList">CharactersList</a></li><li><a href="global.html#ContactoForm">ContactoForm</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HousesList">HousesList</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#LoginRegister">LoginRegister</a></li><li><a href="global.html#MagicEffect">MagicEffect</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#SearchBooks">SearchBooks</a></li><li><a href="global.html#SearchCharacters">SearchCharacters</a></li><li><a href="global.html#ThemeIcon">ThemeIcon</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UseLoader">UseLoader</a></li><li><a href="global.html#UserLoginIcon">UserLoginIcon</a></li><li><a href="global.html#UserNotLoginIcon">UserNotLoginIcon</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#firebaseLogin">firebaseLogin</a></li><li><a href="global.html#firebaseLogout">firebaseLogout</a></li><li><a href="global.html#firebaseRegistro">firebaseRegistro</a></li><li><a href="global.html#onAuthStateListener">onAuthStateListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 08 2024 19:25:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

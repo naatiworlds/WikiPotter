@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: router/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: router/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file router.js
+ * @description Configuración de las rutas de la aplicación utilizando `react-router-dom`. Este archivo define las rutas y los componentes correspondientes, 
+ * así como la carga diferida (lazy loading) para optimizar el rendimiento.
+ * 
+ * @dependencies
+ * - `react-router-dom`: Para la configuración de rutas y manejo de la navegación.
+ * - `lazy`: Para cargar los componentes de manera diferida.
+ * - `LayoutPublic`: Layout para las páginas públicas de la aplicación.
+ * - `LayoutPrivate`: Layout para las páginas privadas, accesibles solo para usuarios autenticados.
+ * - `LoaderCharacters`, `LoaderBooks`, `loaderCharacter`, `loaderBook`: Cargadores de datos para los personajes y libros, utilizados para la carga de datos antes de renderizar las páginas correspondientes.
+ * 
+ * @version 1.0
+ * @date 2024
+ */
+
+import { createBrowserRouter } from "react-router-dom"; // Función para crear el enrutador del navegador
+import { lazy } from "react"; // Para cargar componentes de manera diferida
+
+// Cargar componentes de manera diferida (lazy loading)
+const Home = lazy(() => import("../pages/Home"));
+const Characters = lazy(() => import("../pages/Characters"));
+const Books = lazy(() => import("../pages/Books"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+const LayoutPublic = lazy(() => import("../layouts/LayoutPublic"));
+const Book = lazy(() => import("../pages/Book"));
+const Contacto = lazy(() => import("../pages/Contacto"));
+const Character = lazy(() => import("../pages/Character"));
+
+// Importación de layouts privados y cargadores
+import LayoutPrivate from "../layouts/LayoutPrivate";
+import Profile from "../pages/Profile";
+import { LoaderCharacters } from "../loaders/LoaderCharacters";
+import { LoaderBooks } from "../loaders/LoaderBooks";
+import { loaderCharacter } from "../loaders/LoaderCharacter";
+import { loaderBook } from "../loaders/LoaderBook";
+
+// Definición de las rutas
+export const router = createBrowserRouter([
+  {
+    path: "/", // Ruta base de la aplicación
+    element: &lt;LayoutPublic />, // Layout público
+    errorElement: &lt;NotFound />, // Página de error en caso de ruta no encontrada
+    children: [
+      {
+        errorElement: &lt;NotFound />, // Página de error para las rutas secundarias
+        children: [
+          {
+            index: true, // Página principal
+            element: &lt;Home />, // Componente Home
+          },
+          {
+            path: "/characters", // Ruta de personajes
+            element: &lt;Characters />, // Componente Characters
+            loader: LoaderCharacters, // Cargador de datos de personajes
+          },
+          {
+            path: "/character/:nickname", // Ruta individual de un personaje
+            element: &lt;Character />, // Componente Character
+            loader: loaderCharacter, // Cargador de datos de un personaje específico
+          },
+          {
+            path: "/books", // Ruta de libros
+            element: &lt;Books />, // Componente Books
+            loader: LoaderBooks, // Cargador de datos de libros
+          },
+          {
+            path: "/book/:title", // Ruta individual de un libro
+            element: &lt;Book />, // Componente Book
+            loader: loaderBook, // Cargador de datos de un libro específico
+          },
+          {
+            path: "/contacto", // Ruta de contacto
+            element: &lt;Contacto />, // Componente Contacto
+          },
+          {
+            path: "/profile", // Ruta de perfil de usuario (requiere autenticación)
+            element: &lt;LayoutPrivate />, // Layout privado para páginas que requieren autenticación
+            children: [
+              {
+                index: true, // Página de perfil
+                element: &lt;Profile />, // Componente Profile
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+]);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#CharactersList">CharactersList</a></li><li><a href="global.html#ContactoForm">ContactoForm</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HousesList">HousesList</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#LoginRegister">LoginRegister</a></li><li><a href="global.html#MagicEffect">MagicEffect</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#SearchBooks">SearchBooks</a></li><li><a href="global.html#SearchCharacters">SearchCharacters</a></li><li><a href="global.html#ThemeIcon">ThemeIcon</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UseLoader">UseLoader</a></li><li><a href="global.html#UserLoginIcon">UserLoginIcon</a></li><li><a href="global.html#UserNotLoginIcon">UserNotLoginIcon</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#firebaseLogin">firebaseLogin</a></li><li><a href="global.html#firebaseLogout">firebaseLogout</a></li><li><a href="global.html#firebaseRegistro">firebaseRegistro</a></li><li><a href="global.html#onAuthStateListener">onAuthStateListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 08 2024 19:25:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

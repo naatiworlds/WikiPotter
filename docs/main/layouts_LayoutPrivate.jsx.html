@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: layouts/LayoutPrivate.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: layouts/LayoutPrivate.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file LayoutPrivate.js
+ * @description Este componente es una **layout** que envuelve las rutas privadas de la aplicación.
+ * Verifica si el usuario está autenticado y si tiene una sesión activa. Si es así, permite el acceso a las rutas privadas.
+ * Si no, redirige al usuario a la página de inicio ("/").
+ * Además, aplica el tema global al contenedor según la configuración del contexto de tema.
+ * 
+ * Utiliza los contextos `UserContext` y `ThemeContext` para acceder y administrar la información del usuario y del tema.
+ * 
+ * @dependencies
+ * - React (`useContext`, `useState`, `useEffect`)
+ * - React Router (`Navigate`, `Outlet`)
+ * @version 1.0
+ * @date 2024
+ */
+
+import { Navigate, Outlet } from "react-router-dom"; // Componente de redirección y espacio para las rutas hijas
+import { useContext, useEffect, useState } from "react"; // Hooks de React
+import { ThemeContext } from "../context/ThemeContext"; // Contexto de tema
+import { UserContext } from "../context/UserContext"; // Contexto de usuario
+
+/**
+ * LayoutPrivate es un componente que se utiliza para proteger las rutas privadas de la aplicación.
+ * Verifica si un usuario está autenticado y redirige si no lo está.
+ * 
+ * @returns {JSX.Element} Un layout que muestra las rutas hijas (`Outlet`) si el usuario está autenticado, 
+ * o redirige al inicio si no lo está.
+ */
+const LayoutPrivate = () => {
+  // Obtiene el usuario y la función `setUser` del contexto de usuario
+  const { user, setUser } = useContext(UserContext);
+  
+  // Obtiene el tema actual del contexto de tema
+  const { theme } = useContext(ThemeContext);
+  
+  // Estado para controlar el cargado de la verificación del usuario
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Verificar si el usuario está almacenado en el localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    
+    // Si el usuario existe en el localStorage y no está en el estado del contexto, se sincroniza
+    if (storedUser &amp;&amp; !user) {
+      setUser(storedUser); // Configura el usuario en el contexto
+    }
+    
+    setIsLoading(false); // Marcar como cargado
+  }, [user, setUser]);
+
+  // Mientras se verifica la carga del usuario, mostrar un mensaje de carga
+  if (isLoading) {
+    return &lt;div className="loading">Cargando...&lt;/div>;
+  }
+
+  // Si el usuario está autenticado, mostrar las rutas hijas (Outlet)
+  // Si no, redirigir al inicio ("/")
+  return (
+    &lt;div className={theme}> {/* Aplica el tema actual */}
+      {user ? &lt;Outlet /> : &lt;Navigate to="/" />} {/* Muestra el contenido o redirige */}
+    &lt;/div>
+  );
+};
+
+export default LayoutPrivate;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#CharactersList">CharactersList</a></li><li><a href="global.html#ContactoForm">ContactoForm</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HousesList">HousesList</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#LoginRegister">LoginRegister</a></li><li><a href="global.html#MagicEffect">MagicEffect</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#SearchBooks">SearchBooks</a></li><li><a href="global.html#SearchCharacters">SearchCharacters</a></li><li><a href="global.html#ThemeIcon">ThemeIcon</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UseLoader">UseLoader</a></li><li><a href="global.html#UserLoginIcon">UserLoginIcon</a></li><li><a href="global.html#UserNotLoginIcon">UserNotLoginIcon</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#firebaseLogin">firebaseLogin</a></li><li><a href="global.html#firebaseLogout">firebaseLogout</a></li><li><a href="global.html#firebaseRegistro">firebaseRegistro</a></li><li><a href="global.html#onAuthStateListener">onAuthStateListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 08 2024 19:25:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

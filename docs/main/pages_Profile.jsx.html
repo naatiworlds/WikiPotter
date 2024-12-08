@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Profile.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Profile.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Profile.js
+ * @description Este componente representa la página de perfil del usuario, donde pueden elegir su personaje, libro y casa favoritos de la saga de Harry Potter. 
+ * También incluye un tutorial interactivo usando el paquete `react-joyride` para guiar al usuario a través del proceso de selección de favoritos.
+ * 
+ * @dependencies
+ * - `react`: Para crear el componente React.
+ * - `react-router-dom`: Para manejar la navegación y el acceso a rutas.
+ * - `react-joyride`: Para mostrar un tutorial interactivo.
+ * - `UseLoader`: Un hook personalizado que carga los datos de libros, personajes y casas.
+ * - `UserContext`: Contexto para acceder y gestionar los datos del usuario.
+ * - `ThemeContext`: Contexto para gestionar el tema de la interfaz.
+ * - `localStorage`: Para guardar los favoritos del usuario.
+ * 
+ * @returns {JSX.Element} El componente que muestra el perfil del usuario, con la opción de seleccionar favoritos y un tutorial interactivo.
+ * 
+ * @version 1.0
+ * @date 2024
+ */
+
+import { useContext, useEffect, useState } from "react"; // Importación de React hooks
+import UseLoader from "../hooks/UseLoader"; // Hook personalizado para cargar datos
+import { UserContext } from "../context/UserContext"; // Contexto del usuario
+import Joyride from "react-joyride"; // Paquete para el tutorial interactivo
+import { ThemeContext } from "../context/ThemeContext"; // Contexto del tema visual
+
+const Profile = () => {
+  const { books, characters, houses, loading, error } = UseLoader(); // Obtener los datos desde el hook UseLoader
+  const { theme } = useContext(ThemeContext); // Obtener el tema actual
+  const { user } = useContext(UserContext); // Obtener el usuario desde el contexto
+
+  // Función para obtener los favoritos desde el localStorage
+  const getInitialFavorites = () => {
+    try {
+      const savedFavorites = JSON.parse(localStorage.getItem("favorites"));
+      return savedFavorites || { character: null, book: null, house: null };
+    } catch (err) {
+      console.error("Error reading favorites from localStorage:", err);
+      return { character: null, book: null, house: null };
+    }
+  };
+
+  const [favorites, setFavorites] = useState(getInitialFavorites); // Estado para gestionar los favoritos
+  const [runTutorial, setRunTutorial] = useState(false); // Estado para controlar la ejecución del tutorial
+
+  // Sincronizar los favoritos con el localStorage cuando cambian
+  useEffect(() => {
+    if (user) {
+      const hasCompleteFavorites =
+        favorites.character &amp;&amp; favorites.book &amp;&amp; favorites.house;
+
+      // Guardar los favoritos solo si son completos
+      if (hasCompleteFavorites) {
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+      }
+    }
+  }, [favorites, user]);
+
+  // Configuración del tutorial, basado en si los favoritos están completos
+  useEffect(() => {
+    if (user) {
+      const hasCompleteFavorites =
+        favorites.character &amp;&amp; favorites.book &amp;&amp; favorites.house;
+      setRunTutorial(!hasCompleteFavorites); // Si no se han seleccionado todos los favoritos, iniciar tutorial
+    }
+  }, [user, favorites]);
+
+  // Pasos para el tutorial interactivo
+  const steps = [
+    {
+      target: ".character-select",
+      content: "Elige tu personaje favorito de Harry Potter.",
+    },
+    {
+      target: ".book-select",
+      content: "Elige tu libro favorito de la saga.",
+    },
+    {
+      target: ".house-select",
+      content: "Selecciona la casa que más te representa.",
+    },
+    {
+      target: ".profile-summary",
+      content: "¡Aquí están tus elecciones! Bienvenido al mundo mágico.",
+    },
+  ];
+
+  // Función para manejar la selección de los favoritos
+  const handleSelectFavorite = (type, value) => {
+    setFavorites((prev) => ({ ...prev, [type]: value }));
+  };
+
+  // Mostrar mensaje si no hay usuario
+  if (!user) {
+    return &lt;p>Inicia sesión para acceder a tu perfil.&lt;/p>;
+  }
+
+  // Mostrar mensaje si los datos están cargando
+  if (loading) {
+    return &lt;p>Cargando datos...&lt;/p>;
+  }
+
+  // Mostrar mensaje de error si hay algún problema con los datos
+  if (error) {
+    return &lt;p>{error}&lt;/p>;
+  }
+
+  return (
+    &lt;div className="profile-container">
+      &lt;h2>Bienvenido, {user.email}&lt;/h2>
+
+      {/* Tutorial interactivo */}
+      &lt;Joyride
+        steps={steps} // Pasos del tutorial
+        continuous
+        showSkipButton
+        run={runTutorial} // Controla si el tutorial se debe ejecutar
+        styles={{
+          options: {
+            arrowColor: "#fff",
+            backgroundColor: "#1f2937",
+            overlayColor: "rgba(0, 0, 0, 0.5)",
+            primaryColor: "#10b981",
+            textColor: "#fff",
+            zIndex: 1000,
+          },
+        }}
+        callback={(data) => {
+          if (data.status === "finished") setRunTutorial(false); // Detener tutorial cuando se termine
+        }}
+      />
+
+      {/* Sección para seleccionar favoritos */}
+      &lt;div className="favorites">
+        &lt;div className="character-select">
+          &lt;h3>Personaje Favorito&lt;/h3>
+          &lt;select
+            className={`select-theme ${theme}`}
+            value={favorites.character || ""}
+            onChange={(e) => handleSelectFavorite("character", e.target.value)}
+          >
+            &lt;option value="">Selecciona&lt;/option>
+            {characters.map((character) => (
+              &lt;option key={character.index} value={character.fullName}>
+                {character.fullName}
+              &lt;/option>
+            ))}
+          &lt;/select>
+        &lt;/div>
+
+        &lt;div className="book-select">
+          &lt;h3>Libro Favorito&lt;/h3>
+          &lt;select
+            className={`select-theme ${theme}`}
+            value={favorites.book || ""}
+            onChange={(e) => handleSelectFavorite("book", e.target.value)}
+          >
+            &lt;option value="">Selecciona&lt;/option>
+            {books.map((book) => (
+              &lt;option key={book.id} value={book.title}>
+                {book.title}
+              &lt;/option>
+            ))}
+          &lt;/select>
+        &lt;/div>
+
+        &lt;div className="house-select">
+          &lt;h3>Casa Favorita&lt;/h3>
+          &lt;select
+            className={`select-theme ${theme}`}
+            value={favorites.house || ""}
+            onChange={(e) => handleSelectFavorite("house", e.target.value)}
+          >
+            &lt;option value="">Selecciona&lt;/option>
+            {houses.map((house) => (
+              &lt;option key={house.index} value={house.house}>
+                {house.house}
+              &lt;/option>
+            ))}
+          &lt;/select>
+        &lt;/div>
+      &lt;/div>
+
+      {/* Resumen del perfil */}
+      &lt;div className="profile-summary">
+        &lt;h2>Tu Perfil&lt;/h2>
+        &lt;p>🎭 Personaje Favorito: {favorites.character || "No seleccionado"}&lt;/p>
+        &lt;p>📚 Libro Favorito: {favorites.book || "No seleccionado"}&lt;/p>
+        &lt;p>🏰 Casa Favorita: {favorites.house || "No seleccionado"}&lt;/p>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default Profile;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#CharactersList">CharactersList</a></li><li><a href="global.html#ContactoForm">ContactoForm</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HousesList">HousesList</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#LoginRegister">LoginRegister</a></li><li><a href="global.html#MagicEffect">MagicEffect</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#SearchBooks">SearchBooks</a></li><li><a href="global.html#SearchCharacters">SearchCharacters</a></li><li><a href="global.html#ThemeIcon">ThemeIcon</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UseLoader">UseLoader</a></li><li><a href="global.html#UserLoginIcon">UserLoginIcon</a></li><li><a href="global.html#UserNotLoginIcon">UserNotLoginIcon</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#firebaseLogin">firebaseLogin</a></li><li><a href="global.html#firebaseLogout">firebaseLogout</a></li><li><a href="global.html#firebaseRegistro">firebaseRegistro</a></li><li><a href="global.html#onAuthStateListener">onAuthStateListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 08 2024 19:25:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

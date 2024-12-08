@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Books.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Books.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Books.js
+ * @description Este componente muestra una lista de libros con opciones de búsqueda, filtrado y paginación. 
+ * Utiliza `useLoaderData` de `react-router-dom` para obtener la lista completa de libros desde un loader 
+ * previamente cargado. Además, permite filtrar los libros por título y año, y navegar entre las páginas de 
+ * los resultados utilizando paginación.
+ * 
+ * @dependencies
+ * - `react-router-dom`: Para manejar la carga de datos con `useLoaderData` y la navegación.
+ * - `useState`: Para gestionar el estado de los filtros, la página actual y otros datos.
+ * - `BooksList`: Un componente que muestra la lista de libros.
+ * - `ShearchBooks`: Un componente para manejar los filtros de búsqueda.
+ * - `../css/index.css`: Archivo de estilos que aplica el diseño al componente.
+ * 
+ * @returns {JSX.Element} Un componente que muestra la lista de libros filtrados y paginados, junto con los 
+ * controles para realizar búsquedas y cambiar de página.
+ * 
+ * @version 1.0
+ * @date 2024
+ */
+
+import { useLoaderData } from "react-router-dom";  // Importa useLoaderData de react-router-dom
+import { useState } from "react";  // Importa useState para manejar el estado de filtros y paginación
+import BooksList from "../components/BooksList";  // Importa el componente que muestra la lista de libros
+import "../css/index.css";  // Importa los estilos CSS del componente
+import ShearchBooks from "../components/ShearchBooks";  // Importa el componente para filtrar por título y año
+
+const Books = () => {
+  // Obtiene los datos de los libros cargados previamente
+  const { books } = useLoaderData();
+
+  // Estados para el filtro
+  const [searchTitle, setSearchTitle] = useState("");  // Estado para almacenar el título buscado
+  const [searchYear, setSearchYear] = useState("");  // Estado para almacenar el año buscado
+
+  // Obtener el rango de años basado en los libros
+  const years = Array.from(
+    new Set(books.map((book) => new Date(book.releaseDate).getFullYear()))
+  ).sort((a, b) => a - b);  // Extrae los años y los ordena
+
+  // Estado para manejar la página actual
+  const [currentPage, setCurrentPage] = useState(1);  // Página actual
+  const itemsPerPage = 4;  // Número de libros por página
+
+  // Filtrar libros por título y año
+  const filteredBooks = books.filter((book) => {
+    const matchesTitle = book.title
+      .toLowerCase()
+      .includes(searchTitle.toLowerCase());  // Filtra por título
+    const matchesYear = searchYear
+      ? new Date(book.releaseDate).getFullYear().toString() === searchYear  // Filtra por año
+      : true;
+
+    return matchesTitle &amp;&amp; matchesYear;
+  });
+
+  // Calcular los índices para paginar
+  const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);  // Calcula el total de páginas
+  const startIndex = (currentPage - 1) * itemsPerPage;  // Calcula el índice de inicio
+  const endIndex = startIndex + itemsPerPage;  // Calcula el índice de fin
+  const visibleBooks = filteredBooks.slice(startIndex, endIndex);  // Libros visibles según la página actual
+
+  // Función para cambiar de página
+  const handlePageChange = (page) => {
+    if (page > 0 &amp;&amp; page &lt;= totalPages) {
+      setCurrentPage(page);  // Cambia la página actual
+    }
+  };
+
+  return (
+    &lt;div className="books-container">
+      {/* Componente de búsqueda y filtros */}
+      &lt;ShearchBooks
+        searchTitle={searchTitle}
+        searchYear={searchYear}
+        setSearchTitle={setSearchTitle}
+        setSearchYear={setSearchYear}
+        years={years}  // Pasa el rango de años al componente de búsqueda
+      />
+
+      {/* Componente que muestra la lista de libros filtrados */}
+      &lt;BooksList className="item-list" books={visibleBooks} />
+
+      {/* Paginación */}
+      &lt;div className="pagination">
+        &lt;button
+          onClick={() => handlePageChange(currentPage - 1)}  // Página anterior
+          disabled={currentPage === 1}  // Deshabilita si ya estamos en la primera página
+        >
+          Previous
+        &lt;/button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          &lt;button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}  // Cambia a la página seleccionada
+            className={currentPage === index + 1 ? "active" : ""}  // Marca la página activa
+          >
+            {index + 1}  {/* Muestra el número de la página */}
+          &lt;/button>
+        ))}
+        &lt;button
+          onClick={() => handlePageChange(currentPage + 1)}  // Página siguiente
+          disabled={currentPage === totalPages}  // Deshabilita si ya estamos en la última página
+        >
+          Next
+        &lt;/button>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default Books;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#CharactersList">CharactersList</a></li><li><a href="global.html#ContactoForm">ContactoForm</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HousesList">HousesList</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#LoginRegister">LoginRegister</a></li><li><a href="global.html#MagicEffect">MagicEffect</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#SearchBooks">SearchBooks</a></li><li><a href="global.html#SearchCharacters">SearchCharacters</a></li><li><a href="global.html#ThemeIcon">ThemeIcon</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UseLoader">UseLoader</a></li><li><a href="global.html#UserLoginIcon">UserLoginIcon</a></li><li><a href="global.html#UserNotLoginIcon">UserNotLoginIcon</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#firebaseLogin">firebaseLogin</a></li><li><a href="global.html#firebaseLogout">firebaseLogout</a></li><li><a href="global.html#firebaseRegistro">firebaseRegistro</a></li><li><a href="global.html#onAuthStateListener">onAuthStateListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 08 2024 19:25:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

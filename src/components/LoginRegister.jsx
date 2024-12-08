@@ -1,27 +1,45 @@
-/* eslint-disable react/prop-types */
+/**
+ * @file LoginRegister.jsx
+ * @description Componente de React para gestionar el inicio de sesión y el registro de usuarios. Utiliza Firebase para la autenticación, `formik` para manejar los formularios y `yup` para la validación de entradas. El componente guarda la información del usuario en `localStorage` para persistencia entre recargas.
+ * @dependencies
+ * - `formik`: Para gestionar formularios con validación en tiempo real.
+ * - `yup`: Para definir esquemas de validación.
+ * - `sweetalert2`: Para mostrar alertas de éxito o error.
+ * - `firebaseLogin` y `firebaseRegistro`: Funciones personalizadas para manejar la autenticación de Firebase.
+ * @version 1.0
+ * @date 2024
+ */
+
 import React, { useContext, useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Joyride from "react-joyride";
 import "../css/LoginRegister.css";
-import UseLoader from "../hooks/UseLoader";
 import { UserContext } from "../context/UserContext";
 import { firebaseLogin, firebaseRegistro } from "../config/FirebaseAuth";
 
+/**
+ * Componente que maneja el inicio de sesión y registro de un usuario.
+ * Si el usuario ya está logueado, se muestra una alerta y el formulario se cierra.
+ * Si el usuario no está logueado, permite el acceso a los formularios de login y registro.
+ *
+ * @param {Object} props
+ * @param {function} props.onClose - Función para cerrar el componente.
+ * @returns {JSX.Element|null} El formulario de login/registro o null si el usuario ya está logueado.
+ */
 const LoginRegister = ({ onClose }) => {
-  const { user, setUser } = useContext(UserContext);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const { user, setUser } = useContext(UserContext); // Obtener y establecer usuario desde contexto.
+  const [isFlipped, setIsFlipped] = useState(false); // Control de si el formulario está volteado.
 
-  // Recuperar sesión persistente de LocalStorage
+  // Recuperar el usuario guardado en LocalStorage al montar el componente.
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
     if (savedUser) {
-      setUser(savedUser);
+      setUser(savedUser); // Si hay un usuario guardado, lo establece en el estado.
     }
   }, [setUser]);
 
-  // Evitar abrir el formulario si el usuario ya está logueado
+  // Si el usuario está logueado, se muestra una alerta y el formulario se cierra automáticamente.
   useEffect(() => {
     if (user) {
       Swal.fire({
@@ -30,11 +48,13 @@ const LoginRegister = ({ onClose }) => {
         icon: "info",
         confirmButtonText: "Aceptar",
       });
-      onClose(); // Cerramos la ventana automáticamente
+      onClose(); // Cerrar el formulario.
     }
   }, [user, onClose]);
 
-  // Formik para Login
+  /**
+   * Hook de Formik para manejar el formulario de inicio de sesión.
+   */
   const formikLogin = useFormik({
     initialValues: {
       email: "",
@@ -58,17 +78,15 @@ const LoginRegister = ({ onClose }) => {
       try {
         await firebaseLogin(values.email, values.password);
         const userData = { email: values.email };
-        setUser(userData);
-
-        // Guardar sesión en LocalStorage
-        localStorage.setItem("user", JSON.stringify(userData));
+        setUser(userData); // Establecer el usuario en el estado global.
+        localStorage.setItem("user", JSON.stringify(userData)); // Guardar el usuario en LocalStorage.
 
         Swal.fire({
           title: "Inicio de sesión exitoso",
           text: `Bienvenido!`,
           icon: "success",
         });
-        onClose();
+        onClose(); // Cerrar el formulario tras un login exitoso.
       } catch (error) {
         Swal.fire({
           title: "Error",
@@ -80,7 +98,9 @@ const LoginRegister = ({ onClose }) => {
     },
   });
 
-  // Formik para Registro
+  /**
+   * Hook de Formik para manejar el formulario de registro.
+   */
   const formikRegister = useFormik({
     initialValues: {
       email: "",
@@ -104,17 +124,15 @@ const LoginRegister = ({ onClose }) => {
       try {
         await firebaseRegistro(values.email, values.password);
         const userData = { email: values.email };
-        setUser(userData);
-
-        // Guardar sesión en LocalStorage
-        localStorage.setItem("user", JSON.stringify(userData));
+        setUser(userData); // Establecer el usuario en el estado global.
+        localStorage.setItem("user", JSON.stringify(userData)); // Guardar el usuario en LocalStorage.
 
         Swal.fire({
           title: "Registro exitoso",
           text: `¡Bienvenido, ${values.email}!`,
           icon: "success",
         });
-        onClose();
+        onClose(); // Cerrar el formulario tras un registro exitoso.
       } catch (error) {
         Swal.fire({
           title: "Error",
@@ -123,12 +141,12 @@ const LoginRegister = ({ onClose }) => {
           confirmButtonText: "Aceptar",
         });
       }
-      resetForm();
+      resetForm(); // Limpiar el formulario después del registro.
     },
   });
 
   return (
-    !user && ( // Renderizamos solo si el usuario no está logueado
+    !user && ( // Renderiza solo si no hay usuario logueado.
       <div
         className="backdrop"
         onClick={(e) => e.target.classList.contains("backdrop") && onClose()}
