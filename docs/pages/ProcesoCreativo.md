@@ -1,3 +1,4 @@
+[![Imagen de botón](../assets/BotonInicio.png)](../README.md)
 # 📞 Páginas y Componentes
 
 Este documento explica el proceso paso a paso para crear páginas funcionales en un proyecto de React, con validaciones.
@@ -5,6 +6,8 @@ Este documento explica el proceso paso a paso para crear páginas funcionales en
 ---
 
 ## 🎯 **Objetivo**
+Crear una web completamente funcional, donde se ponga en uso los conocimientos adquiridos, como por ejemplo el uso de react, 
+
 Crear un formulario de contacto que:
 1. Permita a los usuarios enviar su nombre, correo electrónico y mensaje.
 2. Valide los datos proporcionados (formato del correo, longitud del mensaje, etc.).
@@ -14,6 +17,7 @@ Crear un formulario de contacto que:
 ## 🛠️ **Herramientas Utilizadas**
 - **React**: Framework principal.
 - **SweetAlert2**: Para mostrar alertas de éxito o error.
+- **Joyride**: Para crear mini tutoriales paso a paso de uso.
 - **CSS**: Estilos básicos para el formulario.
 
 ---
