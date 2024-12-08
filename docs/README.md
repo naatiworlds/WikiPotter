@@ -13,7 +13,7 @@
    - [Herramientas de Desarrollo](#herramientas-de-desarrollo) 🛠️
 6. [Justificación de Tecnologías](#justificación-de-tecnologías) 📝
 7. [Resumiendo](#resumiendo) 🧙‍♂️
-8. [Procesos de creación](/docs/pages/ProcesoCreativo.md) 
+8. [Procesos de creación](./pages/ProcesoCreativo.md) 
 
 ## **Idea de la Aplicación** ✨
 La aplicación web de Harry Potter se ha diseñado con el propósito de proporcionar a los usuarios una plataforma interactiva donde puedan explorar y conocer más sobre el mundo de Harry Potter. La aplicación mostrará información detallada sobre los libros de la saga, los personajes más icónicos, y los hechizos más conocidos, brindando una experiencia única tanto para fanáticos como para nuevos seguidores de la serie. Además, permitirá a los usuarios descubrir contenido sobre el universo mágico, facilitando la búsqueda y el aprendizaje sobre temas específicos.
