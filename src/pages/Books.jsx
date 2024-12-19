@@ -23,7 +23,7 @@ import { useLoaderData } from "react-router-dom";  // Importa useLoaderData de r
 import { useState } from "react";  // Importa useState para manejar el estado de filtros y paginación
 import BooksList from "../components/BooksList";  // Importa el componente que muestra la lista de libros
 import "../css/index.css";  // Importa los estilos CSS del componente
-import ShearchBooks from "../components/ShearchBooks";  // Importa el componente para filtrar por título y año
+import ShearchBooks from "../components/SearchBooks";  // Importa el componente para filtrar por título y año
 
 const Books = () => {
   // Obtiene los datos de los libros cargados previamente
