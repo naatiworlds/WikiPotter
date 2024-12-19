@@ -13,7 +13,6 @@
     justify-content: center;
     box-sizing: border-box;
     position: relative; /* Para superponer contenido encima */
-    overflow: hidden; /* Asegurar que el fondo no se salga */
   }
   
   /* Fondo con imagen */
